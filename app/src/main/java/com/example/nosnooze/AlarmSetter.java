@@ -38,7 +38,7 @@ public class AlarmSetter extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                        //CREATE ALARM!!
+                        //CREATE ALARM!!!
 
                         tpHour = hourOfDay;
                         tpMinute = minute;
