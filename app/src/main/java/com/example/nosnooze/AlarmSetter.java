@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class AlarmSetter extends AppCompatActivity {
 
-    TextView timePicker;
+    TextView timePicker, timeShow;
     int tpHour, tpMinute;
 
     @Override
@@ -29,6 +29,7 @@ public class AlarmSetter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_setter);
         timePicker = findViewById(R.id.time_picker);
+        timeShow = findViewById(R.id.show_time);
         timePicker.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -46,7 +47,7 @@ public class AlarmSetter extends AppCompatActivity {
                         try {
                             Date date = formatter.parse(time);
                             SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm");
-                            timePicker.setText(formatter2.format(date));
+                            timeShow.setText(formatter2.format(date));
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }

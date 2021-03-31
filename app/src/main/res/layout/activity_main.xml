@@ -7,26 +7,28 @@
     tools:context=".MainActivity">
 
     <Button
+        tools:text="@string/button_one"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addAlarm"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
-        tools:text="@string/button_one"></Button>
+        ></Button>
 
     <ListView
         android:id="@+id/alarm_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@+id/button"></ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
