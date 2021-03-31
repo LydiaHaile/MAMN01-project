@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoSnooze</string>
+    <string name="button_one">+</string>
 </resources>
