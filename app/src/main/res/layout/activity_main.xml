@@ -11,15 +11,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addAlarm"
-        android:textSize="24sp"
+        android:textSize="16sp"
+        android:text="Add alarm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
-        tools:text="@string/button_one"></Button>
+        tools:text="@string/button_one"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="gotoSensor"
+        android:text="Sensors"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <ListView
         android:id="@+id/alarm_list"
@@ -28,41 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"></ListView>
+        app:layout_constraintTop_toBottomOf="@+id/button"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="54dp">
-
-
-        <TextView
-            android:id="@+id/tvResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:text="Values would be entered here..." />
-
-        <Button
-            android:id="@+id/btnStepCounterOnClick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:onClick="stepCounterOnClick"
-            android:text="Step Counter Sensor" />
-
-        <Button
-            android:id="@+id/btnAccelerometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:onClick="accelerometerSensorOnClick"
-            android:text="Accelerometer" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
