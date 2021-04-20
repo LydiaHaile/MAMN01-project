@@ -7,7 +7,6 @@
     tools:context=".MainActivity">
 
     <Button
-        tools:text="@string/button_one"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
-        ></Button>
+        tools:text="@string/button_one"></Button>
+
 
     <ListView
         android:id="@+id/alarm_list"
@@ -30,5 +30,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"></ListView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="54dp">
 
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="Values would be entered here..." />
+
+        <Button
+            android:id="@+id/btnStepCounterOnClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:onClick="stepCounterOnClick"
+            android:text="Step Counter Sensor" />
+
+        <Button
+            android:id="@+id/btnAccelerometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:onClick="accelerometerSensorOnClick"
+            android:text="Accelerometer" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
