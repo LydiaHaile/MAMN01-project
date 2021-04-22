@@ -31,7 +31,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     ListView alarmList;
-    private static ArrayList<Alarm> alarms = new ArrayList<>();
+    private static final ArrayList<Alarm> alarms = new ArrayList<>();
     private static AlarmAdapter alarmAdapter;
 
     @Override
@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
+
+        for (Alarm alarm : alarms) {
+            Log.d("debugging", "alarm " + alarm.getTime() + " is " + alarm.getActive());
+        }
 
         //ADDING STANDARD ALARMS FOR DEBUGGING (note that these are being created every time app enters  MainActivity)
         addAlarm(new Alarm("08:00", 1, 1));
@@ -59,7 +63,14 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!timeOccupied) {
             alarms.add(alarm);
+            alarmAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void shutOffAlarm(View view) {
+        Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+        serviceIntent.putExtra("extra", "alarm_off");
+        this.startService(serviceIntent);
     }
 
     public void removeAlarm(int index) {
@@ -67,11 +78,6 @@ public class MainActivity extends AppCompatActivity {
         alarmAdapter.notifyDataSetChanged();
         Log.d("alarms", "ArrayList size: " + alarms.size());
         Log.d("alarms", "Adapter size: " + alarmAdapter.getCount());
-    }
-
-    public void gotoSensor(View view) {
-        Intent intent = new Intent(this, SensorPage.class);
-        startActivity(intent);
     }
 
     public void stepCounter(View view) {

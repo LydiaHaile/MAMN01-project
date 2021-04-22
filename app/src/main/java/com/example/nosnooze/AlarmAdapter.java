@@ -4,16 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +20,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
 
     Context context;
     ArrayList<Alarm> alarms;
-    MainActivity ma = new MainActivity();
+    MainActivity mainActivity = new MainActivity();
 
     AlarmAdapter(Context context, ArrayList<Alarm> alarms) {
         super(context, R.layout.row, R.id.alarm_time, alarms);
@@ -43,7 +38,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         TextView disableMethod = row.findViewById(R.id.disable_method);
         disableMethod.setText(alarms.get(position).getMethod());
         SwitchCompat toggler = row.findViewById(R.id.toggle);
-        toggler.toggle();
+        toggler.setChecked(alarms.get(position).getActive());
         toggler.setOnClickListener(v -> {
             if (toggler.isChecked()) {
                 alarmTime.setTextColor(Color.WHITE);
@@ -55,24 +50,17 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                 alarms.get(position).setActive(false);
             }
         });
-
         row.setOnLongClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Delete Alarm")
                     .setMessage("Do you really want to delete alarm for " + alarms.get(position).getTime())
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            ma.removeAlarm(position);
+                            mainActivity.removeAlarm(position);
                         }})
                     .setNegativeButton(android.R.string.no, null).show();
             return false;
         });
-        /*
-        Button button = row.findViewById(R.id.remove_alarm);
-        button.setOnClickListener(v -> {
-
-        });
-        */
         return row;
     }
 }

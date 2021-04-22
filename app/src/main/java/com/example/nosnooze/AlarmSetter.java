@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +26,7 @@ public class AlarmSetter extends AppCompatActivity {
     private TextView timeText;
     private int tpHour, tpMinute;
     private SimpleDateFormat sdf;
-    private String time;
+    private String time = "00:00";
     private Alarm alarm;
     MainActivity ma = new MainActivity();
 
@@ -50,18 +51,14 @@ public class AlarmSetter extends AppCompatActivity {
             timePickerDialog.show();
         });
         Button buttonCreateAlarm = findViewById(R.id.create_alarm);
-        buttonCreateAlarm.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                alarm = new Alarm(time, (int) System.currentTimeMillis(), 1);
-                ma.addAlarm(alarm);
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, tpHour);
-                calendar.set(Calendar.MINUTE, tpMinute);
-                calendar.set(Calendar.SECOND, 0);
-                onTimeSet(calendar);
-            }
+        buttonCreateAlarm.setOnClickListener(v -> {
+            alarm = new Alarm(time, (int) System.currentTimeMillis(), 1);
+            ma.addAlarm(alarm);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, tpHour);
+            calendar.set(Calendar.MINUTE, tpMinute);
+            calendar.set(Calendar.SECOND, 0);
+            onTimeSet(calendar);
         });
     }
 
@@ -79,6 +76,7 @@ public class AlarmSetter extends AppCompatActivity {
         }
         alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         Intent gotoIntent = new Intent(this, MainActivity.class);
+        gotoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(gotoIntent);
     }
 

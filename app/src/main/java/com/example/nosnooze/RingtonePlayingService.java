@@ -50,7 +50,6 @@ public class RingtonePlayingService extends Service {
             this.isRunning = false;
             this.startId = 0;
         } else if(this.isRunning && startId == 1){
-
             this.isRunning = true;
             this.startId = 1;
         }
