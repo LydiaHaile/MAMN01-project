@@ -13,6 +13,8 @@
         android:theme="@style/Theme.NoSnooze">
         <activity android:name=".SensorPage"></activity>
         <activity android:name=".AlarmSetter" />
+        <activity android:name=".StepCounter"/>
+        <activity android:name=".Accelerometer"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

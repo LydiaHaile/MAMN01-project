@@ -74,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void stepCounter(View view) {
+        Intent intent = new Intent(this, StepCounter.class);
+        startActivity(intent);
+    }
+
+    public void accelerometer(View view){
+        Intent intent = new Intent(this, Accelerometer.class);
+        startActivity(intent);
+    }
+
     public void gotoAlarm(View view) {
         Intent intent = new Intent(this, AlarmSetter.class);
         startActivity(intent);
