@@ -39,8 +39,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoSensor(View view) {
-        Intent intent= new Intent(this, SensorPage.class);
+    public void stepCounter(View view) {
+        Intent intent= new Intent(this, StepCounter.class);
         startActivity(intent);
     }
+
+    public void accelerometer(View view){
+        Intent intent = new Intent(this, Accelerometer.class);
+        startActivity(intent);
+    }
+
 }
