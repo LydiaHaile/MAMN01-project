@@ -2,15 +2,20 @@ package com.example.nosnooze;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,27 +25,57 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     ListView alarmList;
-    private final String[] alarms = {"08:40", "08:50", "09:00"};
+    private static ArrayList<Alarm> alarms = new ArrayList<>();
+    private static AlarmAdapter alarmAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         alarmList = findViewById(R.id.alarm_list);
-        AlarmAdapter alarmAdapter = new AlarmAdapter(this, alarms);
+        alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
+
+        //ADDING STANDARD ALARMS FOR DEBUGGING (note that these are being created every time app enters  MainActivity)
+        addAlarm(new Alarm("08:00", 1, 1));
+        addAlarm(new Alarm("08:15", 2, 2));
+        addAlarm(new Alarm("08:30", 3, 3));
     }
 
-    public void addAlarm(View view) {
-        Intent intent = new Intent(this, AlarmSetter.class);
-        startActivity(intent);
+    public void addAlarm(Alarm alarm) {
+        boolean timeOccupied = false;
+        for (Alarm compAlarm : alarms) {
+            if (alarm.getTime().equals(compAlarm.getTime())) {
+                timeOccupied = true;
+                Log.d("alarms", "tried to create alarm but failed: " + alarm.getTime());
+                break;
+            }
+        }
+        if (!timeOccupied) {
+            alarms.add(alarm);
+        }
+    }
+
+    public void removeAlarm(int index) {
+        alarms.remove(index);
+        alarmAdapter.notifyDataSetChanged();
+        Log.d("alarms", "ArrayList size: " + alarms.size());
+        Log.d("alarms", "Adapter size: " + alarmAdapter.getCount());
     }
 
     public void gotoSensor(View view) {
-        Intent intent= new Intent(this, SensorPage.class);
+        Intent intent = new Intent(this, SensorPage.class);
+        startActivity(intent);
+    }
+
+    public void gotoAlarm(View view) {
+        Intent intent = new Intent(this, AlarmSetter.class);
         startActivity(intent);
     }
 }

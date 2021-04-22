@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,29 +8,38 @@
     android:orientation="horizontal"
     android:padding="20dp">
 
+    <Button
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:text="x"
+        android:background="@android:color/transparent"
+        android:textColor="@color/white"/>
+
     <TextView
         android:id="@+id/alarm_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="08:30"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TextView>
+        android:textColor="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
 
-    <Switch
+    <TextView
+        android:id="@+id/disable_method"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="30dp"/>
+        android:layout_below="@+id/alarm_time"
+        android:textColor="@color/white"
+        android:text=" Disable by: taking 10 steps"
+        android:layout_marginTop="10dp"/>
 
-</LinearLayout>
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

@@ -20,16 +20,6 @@
         app:layout_constraintVertical_bias="0.428" />
 
     <Button
-        android:id="@+id/time_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="open time picker"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
-
-    <Button
         android:id="@+id/create_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
