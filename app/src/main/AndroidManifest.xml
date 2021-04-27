@@ -4,6 +4,9 @@
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoSnooze">
-        <activity android:name=".SensorPage"></activity>
+        <service
+            android:name=".BackgroundService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
-        <activity android:name=".StepCounter"/>
-        <activity android:name=".Accelerometer"/>
+        <activity android:name=".StepCounter" />
+        <activity android:name=".Accelerometer" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".RingtonePlayingService"
-            android:enabled="true"/>
+            android:enabled="true" />
+
         <receiver android:name=".AlarmReceiver" />
     </application>
 

@@ -58,12 +58,8 @@ public class AlarmSetter extends AppCompatActivity {
             calendar.set(Calendar.HOUR_OF_DAY, tpHour);
             calendar.set(Calendar.MINUTE, tpMinute);
             calendar.set(Calendar.SECOND, 0);
-            onTimeSet(calendar);
+            startAlarm(calendar);
         });
-    }
-
-    public void onTimeSet(Calendar calendar) {
-        startAlarm(calendar);
     }
 
     private void startAlarm(Calendar c) {

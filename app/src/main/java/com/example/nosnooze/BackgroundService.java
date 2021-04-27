@@ -1,53 +1,51 @@
 package com.example.nosnooze;
 
+import android.app.Service;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.os.IBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Accelerometer extends AppCompatActivity implements SensorEventListener{
-
-    private TextView xText, yText, zText;
+public class BackgroundService extends Service implements SensorEventListener {
     private Sensor mySensor;
     private SensorManager sensorM;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 1000;
 
+    public BackgroundService() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId){
         //setContentView(R.layout.activity_accelerometer);
         sensorM = (SensorManager) getSystemService(SENSOR_SERVICE);
         mySensor = sensorM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorM.registerListener(this, mySensor, SensorManager.SENSOR_DELAY_NORMAL);
+        return START_STICKY;
+    }
 
-        //Assign TextVIew
-        xText = (TextView) findViewById(R.id.xText);
-        yText = (TextView) findViewById(R.id.yText);
-        zText = (TextView) findViewById(R.id.zText);
-
-
+    @Override
+    public void onCreate(){
+        super.onCreate();
+        Toast.makeText(getApplicationContext(), "Started", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         double x1 = Math.round(event.values[0]*100.0)/100.0;
         double y1 = Math.round(event.values[1]*100.0)/100.0;
         double z1 = Math.round(event.values[2]*100.0)/100.0;
-        xText.setText("X: " +  x1);
-        yText.setText("Y: " + y1);
-        zText.setText("Z: " + z1);
 
         float x = event.values[0];
         float y = event.values[1];
@@ -72,12 +70,11 @@ public class Accelerometer extends AppCompatActivity implements SensorEventListe
             last_y = y;
             last_z = z;
         }
-        //  float steps = event.values[0];
-        //   textView.setText("Steps : " + steps);
+
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        //Not in use
+
     }
 }
