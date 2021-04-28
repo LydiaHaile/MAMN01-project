@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     ListView alarmList;
     private static final ArrayList<Alarm> alarms = new ArrayList<>();
     private static AlarmAdapter alarmAdapter;
-    private Accelerometer accelerometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
-        accelerometer = new Accelerometer();
 
 
         for (Alarm alarm : alarms) {
@@ -88,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void accelerometer(View view){
-        Intent intent = new Intent(this, Accelerometer.class);
-        startActivity(intent);
-    }
 
     public void gotoAlarm(View view) {
         Intent intent = new Intent(this, AlarmSetter.class);

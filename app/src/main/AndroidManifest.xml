@@ -18,11 +18,9 @@
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true"></service>
-
         <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
         <activity android:name=".StepCounter" />
-        <activity android:name=".Accelerometer" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
