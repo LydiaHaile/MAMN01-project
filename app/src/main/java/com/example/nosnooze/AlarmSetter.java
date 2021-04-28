@@ -13,15 +13,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
-public class AlarmSetter extends AppCompatActivity {
+public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private TextView timeText;
     private int tpHour, tpMinute;
@@ -29,6 +34,8 @@ public class AlarmSetter extends AppCompatActivity {
     private String time = "00:00";
     private Alarm alarm;
     MainActivity ma = new MainActivity();
+
+    private int selectedInteraction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class AlarmSetter extends AppCompatActivity {
         });
         Button buttonCreateAlarm = findViewById(R.id.create_alarm);
         buttonCreateAlarm.setOnClickListener(v -> {
-            alarm = new Alarm(time, (int) System.currentTimeMillis(), 1);
+            alarm = new Alarm(time, (int) System.currentTimeMillis(),  selectedInteraction);
             ma.addAlarm(alarm);
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, tpHour);
@@ -60,6 +67,15 @@ public class AlarmSetter extends AppCompatActivity {
             calendar.set(Calendar.SECOND, 0);
             startAlarm(calendar);
         });
+
+
+        //Drop down list på vilken interaktion man vill använda
+        Spinner interactionSpinner = (Spinner) findViewById(R.id.interaction_spinner);
+        String[] interactions = getResources().getStringArray(R.array.interactions);
+        ArrayAdapter myAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, interactions);
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        interactionSpinner.setAdapter(myAdapter);
+        interactionSpinner.setOnItemSelectedListener(this);
     }
 
     private void startAlarm(Calendar c) {
@@ -82,5 +98,19 @@ public class AlarmSetter extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
         alarmManager.cancel(pendingIntent);
         timeText.setText("Alarm canceled");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent.getId() == R.id.interaction_spinner) {
+            selectedInteraction = position+1;
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

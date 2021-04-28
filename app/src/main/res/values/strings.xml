@@ -2,4 +2,11 @@
     <string name="app_name">NoSnooze</string>
     <string name="button_one">+</string>
     <string name="set_time">Done</string>"
+
+    <string-array name="interactions">
+        <item>Turn off alarm by shaking the phone</item>
+        <item>Turn off alarm by matching the note</item>
+        <item>Turn off the alarm by taking 10 steps</item>
+    </string-array>
+
 </resources>
