@@ -3,7 +3,7 @@
     <style name="Theme.NoSnooze" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/button_color</item>
-        <item name="colorPrimaryVariant">@color/background_dark</item>
+        <item name="colorPrimaryVariant">@color/light_blue</item>
         <item name="colorOnPrimary">@color/himmelsklila</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/green</item>
