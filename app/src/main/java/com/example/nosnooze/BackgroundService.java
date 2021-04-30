@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ public class BackgroundService extends Service implements SensorEventListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        typeOfInteraction = intent.getExtras().getInt("get_your_interaction");
+        typeOfInteraction = intent.getExtras().getInt("interaction");
+        Toast.makeText(this, "" + typeOfInteraction, Toast.LENGTH_SHORT).show();
         sensorM = (SensorManager) getSystemService(SENSOR_SERVICE);
         //setContentView(R.layout.activity_accelerometer);
         if(typeOfInteraction == 1){
