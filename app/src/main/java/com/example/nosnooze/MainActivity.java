@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d("alarms", "Adapter size: " + alarmAdapter.getCount());
     }
 
-    public void stepCounter(View view) {
+   /* public void stepCounter(View view) {
         Intent intent = new Intent(this, StepCounter.class);
         startActivity(intent);
-    }
+    }*/
 
 
     public void gotoAlarm(View view) {

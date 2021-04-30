@@ -15,11 +15,13 @@ public class AlarmReceiver extends BroadcastReceiver {
                 "I'm tired of bein' poor, and even worse I'm black\n" +
                 "My stomach hurts, so I'm lookin' for a purse to snatch", Toast.LENGTH_SHORT).show();
         String get_your_string = intent.getExtras().getString("extra");
+        int get_your_interaction = intent.getExtras().getInt("interaction");
         Intent serviceIntent = new Intent(context, RingtonePlayingService.class);
         serviceIntent.putExtra("extra", get_your_string);
         context.startService(serviceIntent);
 
         Intent accStart = new Intent(context, BackgroundService.class);
+        accStart.putExtra("interaction", get_your_interaction);
         context.startService(accStart);
     }
 }

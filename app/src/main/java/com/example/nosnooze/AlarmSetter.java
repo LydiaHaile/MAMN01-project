@@ -82,6 +82,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("extra", "alarm on");
+        intent.putExtra("interaction", selectedInteraction);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarm.getId(), intent, 0);
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
