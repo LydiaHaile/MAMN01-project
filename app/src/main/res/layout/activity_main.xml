@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
+    android:background="@color/light_blue"
     tools:context=".MainActivity">
 
     <TextView
@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="NoSnooze"
-        android:textColor="@color/white"
+        android:textColor="@color/himmelsklila"
         android:textSize="40sp"
+        android:fontFamily="@font/lobster"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +23,11 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_button"
         android:onClick="gotoAlarm"
+        android:textSize="23dp"
         android:text="+"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +45,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:divider="@null"
+        android:dividerHeight="7dp"/>
 
 
     <LinearLayout
@@ -59,7 +63,7 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/himmelsklila"
             android:background="@android:color/transparent"
             android:onClick="stepCounter"
             android:text="stepCounter"
@@ -69,7 +73,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/himmelsklila"
             android:background="@android:color/transparent"
             android:text="tyst"
             android:onClick="shutOffAlarm"

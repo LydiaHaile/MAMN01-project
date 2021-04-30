@@ -46,16 +46,16 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         SwitchCompat toggler = row.findViewById(R.id.toggle);
         toggler.setChecked(alarms.get(position).getActive());
         if (toggler.isChecked()) {
-            alarmTime.setTextColor(Color.WHITE);
-            disableMethod.setTextColor(Color.WHITE);
+            alarmTime.setTextColor(context.getResources().getColor(R.color.himmelsklila));
+            disableMethod.setTextColor(context.getResources().getColor(R.color.himmelsklila));
         } else {
             alarmTime.setTextColor(Color.GRAY);
             disableMethod.setTextColor(Color.GRAY);
         }
         toggler.setOnClickListener(v -> {
             if (toggler.isChecked()) {
-                alarmTime.setTextColor(Color.WHITE);
-                disableMethod.setTextColor(Color.WHITE);
+                alarmTime.setTextColor(context.getResources().getColor(R.color.himmelsklila));
+                disableMethod.setTextColor(context.getResources().getColor(R.color.himmelsklila));
                 alarm.setActive(true);
                 enableAlarm(alarm);
             } else {

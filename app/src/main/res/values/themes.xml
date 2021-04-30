@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.NoSnooze" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal3</item>
+        <item name="colorPrimary">@color/button_color</item>
         <item name="colorPrimaryVariant">@color/background_dark</item>
-        <item name="colorOnPrimary">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/himmelsklila</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondary">@color/green</item>
         <item name="colorSecondaryVariant">@color/orange</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->

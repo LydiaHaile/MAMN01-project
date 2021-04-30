@@ -29,6 +29,7 @@ import android.widget.Toast;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
+        addAlarm(new Alarm("11:11", 1, 1,  Calendar.getInstance()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
