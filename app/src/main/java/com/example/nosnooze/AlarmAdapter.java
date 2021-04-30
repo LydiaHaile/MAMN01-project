@@ -71,6 +71,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                     .setMessage("Do you really want to delete alarm for " + alarm.getTime())
                     .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> mainActivity.removeAlarm(position))
                     .setNegativeButton(android.R.string.no, null).show();
+            disableAlarm(alarm);
             return false;
         });
         return row;
