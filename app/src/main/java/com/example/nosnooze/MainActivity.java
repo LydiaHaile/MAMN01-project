@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final ArrayList<Alarm> alarms = new ArrayList<>();
     private static AlarmAdapter alarmAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,28 +44,27 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
-
-
-        for (Alarm alarm : alarms) {
-            Log.d("debugging", "alarm " + alarm.getTime() + " is " + alarm.getActive());
-        }
-
-        //ADDING STANDARD ALARMS FOR DEBUGGING (note that these are being created every time app enters  MainActivity)
-        addAlarm(new Alarm("08:00", 1, 1));
-        addAlarm(new Alarm("08:15", 2, 2));
-        addAlarm(new Alarm("08:30", 3, 3));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addAlarm(Alarm alarm) {
         boolean timeOccupied = false;
         for (Alarm compAlarm : alarms) {
             if (alarm.getTime().equals(compAlarm.getTime())) {
                 timeOccupied = true;
-                Log.d("alarms", "tried to create alarm but failed: " + alarm.getTime());
                 break;
             }
         }
         if (!timeOccupied) {
+            if (alarms.size() != 0) {
+                for (int i = 0; i < alarms.size(); i++) {
+                    if (LocalTime.parse(alarms.get(i).getTime()).isAfter(LocalTime.parse(alarm.getTime()))) {
+                        alarms.add(i, alarm);
+                        alarmAdapter.notifyDataSetChanged();
+                        return;
+                    }
+                }
+            }
             alarms.add(alarm);
             alarmAdapter.notifyDataSetChanged();
         }

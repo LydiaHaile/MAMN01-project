@@ -22,7 +22,6 @@ public class SensorPage extends AppCompatActivity implements SensorEventListener
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
     private TextView textView;
-    private Button btnStepCounterOnClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class SensorPage extends AppCompatActivity implements SensorEventListener
         textView = findViewById(R.id.tvResult);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        btnStepCounterOnClick = findViewById(R.id.btnStepCounterOnClick); // behövs den?
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
