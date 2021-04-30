@@ -37,6 +37,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
 
     private int selectedInteraction;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +60,14 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         });
         Button buttonCreateAlarm = findViewById(R.id.create_alarm);
         buttonCreateAlarm.setOnClickListener(v -> {
-            alarm = new Alarm(time, (int) System.currentTimeMillis(),  selectedInteraction);
-            ma.addAlarm(alarm);
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, tpHour);
             calendar.set(Calendar.MINUTE, tpMinute);
             calendar.set(Calendar.SECOND, 0);
-            startAlarm(calendar);
+            alarm = new Alarm(time, (int) System.currentTimeMillis(),  selectedInteraction, calendar);
+            ma.addAlarm(alarm);
+            startAlarm(alarm);
         });
-
 
         //Drop down list på vilken interaktion man vill använda
         Spinner interactionSpinner = (Spinner) findViewById(R.id.interaction_spinner);
@@ -78,7 +78,8 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         interactionSpinner.setOnItemSelectedListener(this);
     }
 
-    private void startAlarm(Calendar c) {
+    private void startAlarm(Alarm alarm) {
+        Calendar c = alarm.getCalendar();
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("extra", "alarm on");
@@ -105,9 +106,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getId() == R.id.interaction_spinner) {
             selectedInteraction = position+1;
-
         }
-
     }
 
     @Override

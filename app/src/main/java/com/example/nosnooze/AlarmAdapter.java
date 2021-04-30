@@ -1,20 +1,25 @@
 package com.example.nosnooze;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 class AlarmAdapter extends ArrayAdapter<Alarm> {
 
@@ -31,6 +36,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        Alarm alarm = alarms.get(position);
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = layoutInflater.inflate(R.layout.row, parent, false);
         TextView alarmTime = row.findViewById(R.id.alarm_time);
@@ -39,28 +45,58 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         disableMethod.setText(alarms.get(position).getMethod());
         SwitchCompat toggler = row.findViewById(R.id.toggle);
         toggler.setChecked(alarms.get(position).getActive());
+        if (toggler.isChecked()) {
+            alarmTime.setTextColor(Color.WHITE);
+            disableMethod.setTextColor(Color.WHITE);
+        } else {
+            alarmTime.setTextColor(Color.GRAY);
+            disableMethod.setTextColor(Color.GRAY);
+        }
         toggler.setOnClickListener(v -> {
             if (toggler.isChecked()) {
                 alarmTime.setTextColor(Color.WHITE);
                 disableMethod.setTextColor(Color.WHITE);
-                alarms.get(position).setActive(true);
+                alarm.setActive(true);
+                enableAlarm(alarm);
             } else {
                 alarmTime.setTextColor(Color.GRAY);
                 disableMethod.setTextColor(Color.GRAY);
-                alarms.get(position).setActive(false);
+                alarm.setActive(false);
+                disableAlarm(alarm);
             }
         });
         row.setOnLongClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Delete Alarm")
-                    .setMessage("Do you really want to delete alarm for " + alarms.get(position).getTime())
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            mainActivity.removeAlarm(position);
-                        }})
+                    .setMessage("Do you really want to delete alarm for " + alarm.getTime())
+                    .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> mainActivity.removeAlarm(position))
                     .setNegativeButton(android.R.string.no, null).show();
+            disableAlarm(alarm);
             return false;
         });
         return row;
+    }
+
+    private void disableAlarm(Alarm alarm) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarm.getId(), intent, 0);
+        alarmManager.cancel(pendingIntent);
+        Toast.makeText(context, "Disabled alarm " + alarm.getTime(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void enableAlarm(Alarm alarm) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra("extra", "alarm on");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarm.getId(), intent, 0);
+        if (alarm.getCalendar().before(Calendar.getInstance())) {
+            alarm.getCalendar().add(Calendar.DATE, 1);
+        }
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.getCalendar().getTimeInMillis(), pendingIntent);
+        Intent gotoIntent = new Intent(context, MainActivity.class);
+        gotoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(gotoIntent);
+        Toast.makeText(context, "Enabled alarm " + alarm.getTime(), Toast.LENGTH_SHORT).show();
     }
 }

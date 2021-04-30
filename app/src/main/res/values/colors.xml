@@ -15,6 +15,7 @@
     <color name="orange2">#ed9d74 </color>
     <color name="yellow">#fefecc</color>
     <color name="background_dark">#233142</color>
+    <color name="background_border">#1A2635</color>
 
 
 </resources>
