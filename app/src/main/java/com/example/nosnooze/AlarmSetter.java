@@ -44,7 +44,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_alarm_setter);
         timeText = findViewById(R.id.time);
         timeText.setOnClickListener(v -> {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(AlarmSetter.this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar_MinWidth, (view, hourOfDay, minute) -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(AlarmSetter.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, (view, hourOfDay, minute) -> {
                 tpHour =  hourOfDay;
                 tpMinute =  minute;
                 sdf = new SimpleDateFormat("HH:mm");

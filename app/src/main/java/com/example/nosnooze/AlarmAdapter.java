@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,8 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
             new AlertDialog.Builder(context)
                     .setTitle("Delete Alarm")
                     .setMessage("Do you really want to delete alarm for " + alarm.getTime())
-                    .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> mainActivity.removeAlarm(position))
-                    .setNegativeButton(android.R.string.no, null).show();
+                    .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> mainActivity.removeAlarm(position))
+                    .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
             disableAlarm(alarm);
             return false;
         });

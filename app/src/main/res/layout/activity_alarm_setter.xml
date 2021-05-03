@@ -40,7 +40,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time"
         app:layout_constraintVertical_bias="0.377"
+        android:layout_margin="10dp"
         tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Choose interaction"
+        app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent" />16dp"
+        tools:layout_editor_absoluteY="471dp" />33dp"
+        tools:layout_editor_absoluteY="465dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
