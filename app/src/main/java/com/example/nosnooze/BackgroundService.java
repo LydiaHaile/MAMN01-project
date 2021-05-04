@@ -20,8 +20,7 @@ public class BackgroundService extends Service implements SensorEventListener {
     private static final int SHAKE_THRESHOLD = 100;
     private float steps = 0;
     private int typeOfInteraction;
-    private Sensor currentSensor;
-    private TextView BackgroundServiceText;
+    private double MagnitudePrevious = 0;
 
     public BackgroundService() {
     }
@@ -33,19 +32,17 @@ public class BackgroundService extends Service implements SensorEventListener {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
+    public int onStartCommand(Intent intent, int flags, int startId) {
         typeOfInteraction = intent.getExtras().getInt("interaction");
         Toast.makeText(this, "" + typeOfInteraction, Toast.LENGTH_SHORT).show();
         sensorM = (SensorManager) getSystemService(SENSOR_SERVICE);
         //setContentView(R.layout.activity_accelerometer);
-        if(typeOfInteraction == 1){
+        if (typeOfInteraction == 1) {
             mySensor = sensorM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        }
-        else if(typeOfInteraction == 2){
+        } else if (typeOfInteraction == 2) {
             //För annan sensor exempelvis pitch
-        }
-        else{
-            mySensor = sensorM.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        } else {
+            mySensor = sensorM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //ändrad
         }
 
         sensorM.registerListener(this, mySensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -55,63 +52,77 @@ public class BackgroundService extends Service implements SensorEventListener {
     }
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
         Toast.makeText(getApplicationContext(), "Started", Toast.LENGTH_LONG).show();
 
     }
 
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-        double x1 = Math.round(event.values[0]*100.0)/100.0;
-        double y1 = Math.round(event.values[1]*100.0)/100.0;
-        double z1 = Math.round(event.values[2]*100.0)/100.0;
+        if (typeOfInteraction == 1) {
+            double x1 = Math.round(event.values[0] * 100.0) / 100.0;
+            double y1 = Math.round(event.values[1] * 100.0) / 100.0;
+            double z1 = Math.round(event.values[2] * 100.0) / 100.0;
 
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
 
-        long curTime = System.currentTimeMillis();
-        if ((curTime - lastUpdate) > 100) {
-            long diffTime = (curTime - lastUpdate);
-            lastUpdate = curTime;
+            long curTime = System.currentTimeMillis();
+            if ((curTime - lastUpdate) > 100) {
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
 
-            float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
 
-            if (speed > SHAKE_THRESHOLD) {
-                Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
-                serviceIntent.putExtra("extra", "alarm_off");
-                this.startService(serviceIntent);
+                if (speed > SHAKE_THRESHOLD) {
+                    Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+                    serviceIntent.putExtra("extra", "alarm_off");
+                    this.startService(serviceIntent);
+                    Toast.makeText(getApplicationContext(), "Your phone just shook", Toast.LENGTH_LONG).show();
+                    sensorM.unregisterListener(this);
+                }
 
-                Toast.makeText(getApplicationContext(), "Your phone just shook", Toast.LENGTH_LONG).show();
+                last_x = x;
+                last_y = y;
+                last_z = z;
             }
-
-            last_x = x;
-            last_y = y;
-            last_z = z;
-        }}
-        else if(event.sensor.getType()== Sensor.TYPE_GRAVITY){
+        } else if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
             // För pitch sensor senare.
-        }
-        else {
-            steps++;
-            String temp = Float.toString(steps);
-            Toast.makeText(getApplicationContext(), "Steps: " + temp, Toast.LENGTH_LONG).show();
+        } else {
+          // KOD FRÅN  https://programmerworld.co/android/how-to-create-walking-step-counter-app-using-accelerometer-sensor-and-shared-preference-in-android/
+                float x_acceleration = event.values[0];
+                float y_acceleration = event.values[1];
+                float z_acceleration = event.values[2];
 
-           // stepCounter.setText("Steps : " + steps);
 
-            if (steps > 15) {
-                Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
-                serviceIntent.putExtra("extra", "alarm_off");
-                this.startService(serviceIntent);
+                double Magnitude = Math.sqrt(x_acceleration * x_acceleration + y_acceleration * y_acceleration + z_acceleration * z_acceleration);
+                double MagnitudeDelta = Magnitude - MagnitudePrevious;
+                MagnitudePrevious = Magnitude;
+
+                if (MagnitudeDelta > 3) {
+                    steps++;
+                    Toast.makeText(getApplicationContext(), "Steps: " + steps, Toast.LENGTH_LONG).show();
+                }
+
+
+                if (steps >= 10) {
+                    Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+                    serviceIntent.putExtra("extra", "alarm_off");
+                    this.startService(serviceIntent);
+                    sensorM.unregisterListener(this);
+                }
+
+
             }
+
         }
+
+        @Override
+        public void onAccuracyChanged (Sensor sensor,int accuracy){
+
+        }
+
     }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-}
