@@ -8,37 +8,50 @@
     tools:context=".AlarmSetter"
     android:background="@color/light_blue">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
-        >
+        android:background="@color/white">
 
         <Button
             android:id="@+id/abort_alarm"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            />
-        <Button
-            android:id="@+id/create_alarm"
-            android:layout_width="110dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/black"
-            android:text="Set Alarm"
+            android:background="@android:color/transparent"
+            android:text="Cancel"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Alarm"
+            android:textColor="@color/himmelsklila"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/create_alarm"
+            app:layout_constraintStart_toEndOf="@+id/abort_alarm"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.333" />
+
+        <Button
+            android:id="@+id/create_alarm"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
             android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:text="Save"
+            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TimePicker
         android:id="@+id/timePicker"
@@ -54,17 +67,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.668" />
 
-
-
     <Spinner
         android:id="@+id/interaction_spinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="30dp"
-        android:background="@drawable/rounded_background"
         android:gravity="center_horizontal"
-
         android:textAlignment="center"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
