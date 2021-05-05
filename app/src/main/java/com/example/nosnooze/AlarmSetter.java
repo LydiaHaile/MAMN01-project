@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -43,21 +44,27 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_setter);
         timeText = findViewById(R.id.time);
-        timeText.setOnClickListener(v -> {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(AlarmSetter.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, (view, hourOfDay, minute) -> {
-                tpHour =  hourOfDay;
-                tpMinute =  minute;
+        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                String mindAndSec = hourOfDay + ":" +minute;
                 sdf = new SimpleDateFormat("HH:mm");
                 try {
-                    time = sdf.format(sdf.parse(hourOfDay + ":" + minute));
-                    timeText.setText(time);
+                    time = sdf.format(sdf.parse(timePicker.getHour() + ":" + timePicker.getMinute()));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-            }, 12, 0, true);
-            timePickerDialog.updateTime(tpHour, tpMinute);
-            timePickerDialog.show();
+            }
         });
+        sdf = new SimpleDateFormat("HH:mm");
+        try {
+            time = sdf.format(sdf.parse(timePicker.getHour() + ":" + timePicker.getMinute()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Button buttonCreateAlarm = findViewById(R.id.create_alarm);
         buttonCreateAlarm.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
