@@ -18,8 +18,10 @@
     <color name="background_border">#1A2635</color>
     <color name="light_blue">#DAE4F1</color>
     <color name="light_light_blue">#EBF2FB</color>
+    <color name="light_light_light_blue">#F2F5FA</color>
     <color name="himmelsklila">#333f4f</color>
     <color name="green">#14B180</color>
+    <color name="dark_green">#0E9369</color>
     <color name="button_color">#FFFFFF</color>
 
 

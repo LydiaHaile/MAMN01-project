@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 public class Alarm implements Serializable {
 
-    private final String SHAKE_PHONE = " Disable alarm by shaking your phone";
+    private final String PHOTO_SCAN = " Disable alarm by matching color in photo";
     private final String MATCH_NOTE = " Disable alarm by matching the note";
     private final String TAKE_STEPS = " Disable alarm by taking 10 steps";
     private final String TILT_PHONE = " Disable phone by tilting your phone";
@@ -34,7 +34,7 @@ public class Alarm implements Serializable {
 
     public String getMethod() {
         if (this.method == 1) {
-            return SHAKE_PHONE;
+            return PHOTO_SCAN;
         } else if (this.method == 2) {
             return MATCH_NOTE;
         } else if (this.method == 3) {

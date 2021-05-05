@@ -9,10 +9,20 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //Find what alarm is going off
+        MainActivity mainActivity = new MainActivity();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String time = sdf.format(calendar.getTime());
+        int alarmId = mainActivity.getAlarm(time).getId();
+
         String get_your_string = intent.getExtras().getString("extra");
         int get_your_interaction = intent.getExtras().getInt("interaction");
 
@@ -21,26 +31,23 @@ public class AlarmReceiver extends BroadcastReceiver {
         serviceIntent.putExtra("extra", get_your_string);
         context.startService(serviceIntent);
 
-        //Start Service based off alarm type
-        startAlarmActivity(context, get_your_interaction);
-    }
-
-
-    private void startAlarmActivity(Context context, int interaction) {
-        Intent alarmActivity = new Intent(context, PhoneTilt.class);
-        if (interaction == 1) {
-            // TODO implement PhoneSkake class
-            alarmActivity = new Intent(context, BackgroundService.class);
-        } else if (interaction == 2) {
-            // TODO implement MatchNote class
-            alarmActivity = new Intent(context, BackgroundService.class);
-        } else if (interaction == 3) {
-            // TODO implement TakeSteps class
-            alarmActivity = new Intent(context, BackgroundService.class);
+        if (get_your_interaction == 1) {
+            //PHOTO SCAN
+            Intent methodIntent = new Intent(context, PhotoScan.class);
+            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(methodIntent);
+        } else if (get_your_interaction == 2) {
+            //MATCH NOTE
+            Intent methodIntent = new Intent(context, BackgroundService.class);
+            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(methodIntent);
+        } else if (get_your_interaction == 3) {
+            //TAKE STEPS
+            Intent methodIntent = new Intent(context, StepCounter.class);
+            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(methodIntent);
         } else {
-            alarmActivity = new Intent(context, PhoneTilt.class);
+            //NOTHING HAPPENS
         }
-        alarmActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(alarmActivity);
     }
 }

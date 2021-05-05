@@ -9,10 +9,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         TextView disableMethod = row.findViewById(R.id.disable_method);
         disableMethod.setText(alarms.get(position).getMethod());
         SwitchCompat toggler = row.findViewById(R.id.toggle);
+        ImageButton imageButton = row.findViewById(R.id.imageButton);
         toggler.setChecked(alarms.get(position).getActive());
         if (toggler.isChecked()) {
             alarmTime.setTextColor(context.getResources().getColor(R.color.himmelsklila));
@@ -68,12 +72,11 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
             }
         });
         row.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(context)
-                    .setTitle("Delete Alarm")
-                    .setMessage("Do you really want to delete alarm for " + alarm.getTime())
-                    .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> mainActivity.removeAlarm(position))
-                    .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
+            removeAlarmPopup(alarm, position);
             return false;
+        });
+        imageButton.setOnClickListener(v -> {
+            removeAlarmPopup(alarm, position);
         });
         return row;
     }
@@ -99,5 +102,13 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         gotoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(gotoIntent);
         Toast.makeText(context, "Enabled alarm " + alarm.getTime(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeAlarmPopup(Alarm alarm, int position) {
+        new AlertDialog.Builder(context)
+                .setTitle("Delete Alarm")
+                .setMessage("Do you really want to delete alarm for " + alarm.getTime())
+                .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> mainActivity.removeAlarm(position))
+                .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
     }
 }

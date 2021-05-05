@@ -29,33 +29,37 @@ import java.util.Random;
 
 public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    private TextView timeText;
-    private int tpHour, tpMinute;
+    private int tpHour, tpMinute, selectedInteraction;
     private SimpleDateFormat sdf;
+    private TextView timeText;
     private String time = "00:00";
     private Alarm alarm;
-    MainActivity ma = new MainActivity();
-
-    private int selectedInteraction;
+    private final MainActivity ma = new MainActivity();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_setter);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        Button cancelButton = findViewById(R.id.abort_alarm);
         timeText = findViewById(R.id.time);
+
+        cancelButton.setOnClickListener(v -> {
+            Intent goBackIntent = new Intent(this, MainActivity.class);
+            startActivity(goBackIntent);
+        });
+
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                String mindAndSec = hourOfDay + ":" +minute;
-                sdf = new SimpleDateFormat("HH:mm");
-                try {
-                    time = sdf.format(sdf.parse(timePicker.getHour() + ":" + timePicker.getMinute()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+        timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
+            tpHour = hourOfDay;
+            tpMinute = minute;
+            sdf = new SimpleDateFormat("HH:mm");
+            try {
+                time = sdf.format(sdf.parse(timePicker.getHour() + ":" + timePicker.getMinute()));
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         });
         sdf = new SimpleDateFormat("HH:mm");
@@ -76,7 +80,6 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
             startAlarm(alarm);
         });
 
-        //Drop down list på vilken interaktion man vill använda
         Spinner interactionSpinner = (Spinner) findViewById(R.id.interaction_spinner);
         String[] interactions = getResources().getStringArray(R.array.interactions);
         ArrayAdapter myAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, interactions);
