@@ -22,10 +22,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
-        addAlarm(new Alarm("11:11", 1, 1,  Calendar.getInstance()));
+        addAlarm(new Alarm("08:00", 123, 1, Calendar.getInstance()));
+        addAlarm(new Alarm("08:15", 321, 2, Calendar.getInstance()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -81,18 +84,20 @@ public class MainActivity extends AppCompatActivity {
     public void removeAlarm(int index) {
         alarms.remove(index);
         alarmAdapter.notifyDataSetChanged();
-        Log.d("alarms", "ArrayList size: " + alarms.size());
-        Log.d("alarms", "Adapter size: " + alarmAdapter.getCount());
     }
-
-   /* public void stepCounter(View view) {
-        Intent intent = new Intent(this, StepCounter.class);
-        startActivity(intent);
-    }*/
-
 
     public void gotoAlarm(View view) {
         Intent intent = new Intent(this, AlarmSetter.class);
         startActivity(intent);
+    }
+
+    public Alarm getAlarm(String time) {
+        for (Alarm alarm : alarms) {
+            if (alarm.getTime().equals(time)) {
+                return alarm;
+            }
+        }
+        //should never happen!
+        return alarms.get(0);
     }
 }

@@ -10,6 +10,7 @@ public class Alarm implements Serializable {
     private final String SHAKE_PHONE = " Disable alarm by shaking your phone";
     private final String MATCH_NOTE = " Disable alarm by matching the note";
     private final String TAKE_STEPS = " Disable alarm by taking 10 steps";
+    private final String TILT_PHONE = " Disable phone by tilting your phone";
 
     private Calendar calendar;
     private boolean active = true;
@@ -36,8 +37,10 @@ public class Alarm implements Serializable {
             return SHAKE_PHONE;
         } else if (this.method == 2) {
             return MATCH_NOTE;
-        } else {
+        } else if (this.method == 3) {
             return TAKE_STEPS;
+        } else {
+            return TILT_PHONE;
         }
     }
 

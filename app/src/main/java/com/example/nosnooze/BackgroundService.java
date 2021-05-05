@@ -17,22 +17,20 @@ public class BackgroundService extends Service implements SensorEventListener {
     private SensorManager sensorM;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 100;
-    private float steps = 0;
+    private static final int SHAKE_THRESHOLD = 1000;
+    private int steps = 0;
     private int typeOfInteraction;
     private double MagnitudePrevious = 0;
-
-    public BackgroundService() {
-    }
+    private AlarmHandler alarmHandler;
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        alarmHandler = new AlarmHandler();
         typeOfInteraction = intent.getExtras().getInt("interaction");
         Toast.makeText(this, "" + typeOfInteraction, Toast.LENGTH_SHORT).show();
         sensorM = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -44,9 +42,7 @@ public class BackgroundService extends Service implements SensorEventListener {
         } else {
             mySensor = sensorM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER); //ändrad
         }
-
         sensorM.registerListener(this, mySensor, SensorManager.SENSOR_DELAY_NORMAL);
-
         //stepCounter.setText("Steps : " + steps);
         return START_STICKY;
     }
@@ -55,9 +51,7 @@ public class BackgroundService extends Service implements SensorEventListener {
     public void onCreate() {
         super.onCreate();
         Toast.makeText(getApplicationContext(), "Started", Toast.LENGTH_LONG).show();
-
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -84,7 +78,6 @@ public class BackgroundService extends Service implements SensorEventListener {
                     Toast.makeText(getApplicationContext(), "Your phone just shook", Toast.LENGTH_LONG).show();
                     sensorM.unregisterListener(this);
                 }
-
                 last_x = x;
                 last_y = y;
                 last_z = z;
@@ -96,17 +89,14 @@ public class BackgroundService extends Service implements SensorEventListener {
                 float x_acceleration = event.values[0];
                 float y_acceleration = event.values[1];
                 float z_acceleration = event.values[2];
-
-
                 double Magnitude = Math.sqrt(x_acceleration * x_acceleration + y_acceleration * y_acceleration + z_acceleration * z_acceleration);
                 double MagnitudeDelta = Magnitude - MagnitudePrevious;
                 MagnitudePrevious = Magnitude;
 
-                if (MagnitudeDelta > 3) {
+                if (MagnitudeDelta > 2) {
                     steps++;
-                    Toast.makeText(getApplicationContext(), "Steps: " + steps, Toast.LENGTH_LONG).show();
+                    this.alarmHandler.setProgress("taken so far!");
                 }
-
 
                 if (steps >= 10) {
                     Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
@@ -114,10 +104,7 @@ public class BackgroundService extends Service implements SensorEventListener {
                     this.startService(serviceIntent);
                     sensorM.unregisterListener(this);
                 }
-
-
             }
-
         }
 
         @Override

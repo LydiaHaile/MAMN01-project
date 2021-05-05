@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,6 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                     .setMessage("Do you really want to delete alarm for " + alarm.getTime())
                     .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> mainActivity.removeAlarm(position))
                     .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
-            disableAlarm(alarm);
             return false;
         });
         return row;

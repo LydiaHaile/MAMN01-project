@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlarmHandler"
+    android:background="@color/light_blue">
+
+    <TextView
+        android:id="@+id/alarm_time_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:hint="ALARM GOING OFF AT TIME XX:XX TEXT"
+        android:textColor="@color/himmelsklila"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327" />
+
+    <TextView
+        android:id="@+id/method_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="METHOD TEXT"
+        android:textSize="20sp"
+        android:textColor="@color/himmelsklila"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528" />
+
+    <TextView
+        android:id="@+id/progress_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="PROGRESS TEXT"
+        android:textSize="40sp"
+        android:textColor="@color/himmelsklila"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/method_handler" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

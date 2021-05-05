@@ -16,7 +16,8 @@
     <color name="yellow">#fefecc</color>
     <color name="background_dark">#233142</color>
     <color name="background_border">#1A2635</color>
-    <color name="light_blue">#EBF2FB</color>
+    <color name="light_blue">#DAE4F1</color>
+    <color name="light_light_blue">#EBF2FB</color>
     <color name="himmelsklila">#333f4f</color>
     <color name="green">#14B180</color>
     <color name="button_color">#FFFFFF</color>

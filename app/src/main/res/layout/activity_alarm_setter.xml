@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/himmelsklila"
         android:text="00:00"
-        android:textSize="80sp"
+        android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,38 +23,38 @@
 
     <Button
         android:id="@+id/create_alarm"
-        android:layout_width="wrap_content"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Set Alarm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Spinner
         android:id="@+id/interaction_spinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@android:color/white"
+        android:textAlignment="center"
+        android:background="@drawable/rounded_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time"
         app:layout_constraintVertical_bias="0.377"
-        android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_margin="30dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:text="Choose interaction"
+        android:fontFamily="@font/lobster"
+        android:text="Choose 'Shut off' interaction"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent" />16dp"
-        tools:layout_editor_absoluteY="471dp" />33dp"
-        tools:layout_editor_absoluteY="465dp" />
-
+        app:layout_constraintHorizontal_bias="0.252"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

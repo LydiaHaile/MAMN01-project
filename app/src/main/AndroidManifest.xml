@@ -3,6 +3,7 @@
     package="com.example.nosnooze">
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-feature android:name="android.hardware.sensor.stepcounter" />
     <uses-feature android:name="android.hardware.sensor.stepdetector" />
@@ -14,10 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoSnooze">
+        <activity android:name=".PhoneTilt"></activity>
+        <activity android:name=".AlarmHandler" />
+
         <service
             android:name=".BackgroundService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
         <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
         <activity android:name=".StepCounter" />

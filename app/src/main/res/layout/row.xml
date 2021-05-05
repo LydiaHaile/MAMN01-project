@@ -7,8 +7,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="20dp"
-    android:backgroundTint="@color/white"
-    android:background="@drawable/rounded_button"
     android:layout_margin="20dp">
 
 
