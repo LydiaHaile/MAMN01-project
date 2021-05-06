@@ -1,14 +1,24 @@
 package com.example.nosnooze;
 
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.text.Html;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import java.nio.channels.Channel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String time = sdf.format(calendar.getTime());
-        int alarmId = mainActivity.getAlarm(time).getId();
+        Alarm alarm = mainActivity.getAlarm(time);
 
         String get_your_string = intent.getExtras().getString("extra");
         int get_your_interaction = intent.getExtras().getInt("interaction");
@@ -45,9 +55,26 @@ public class AlarmReceiver extends BroadcastReceiver {
             //TAKE STEPS
             Intent methodIntent = new Intent(context, StepCounter.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            methodIntent.putExtra("time", alarm.getTime());
+            sendNotification(methodIntent, alarm, context);
             context.startActivity(methodIntent);
         } else {
             //NOTHING HAPPENS
         }
+    }
+
+    public void sendNotification(Intent intent, Alarm alarm, Context context) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channelID")
+                .setSmallIcon(R.drawable.circle)
+                .setContentTitle("1")
+                .setContentText("2")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                //.setContentIntent(pendingIntent)
+                //.setAutoCancel(true);
+
+        Notification notification = builder.build();
+        NotificationManagerCompat.from(context).notify(0, notification);
     }
 }

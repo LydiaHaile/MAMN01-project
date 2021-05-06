@@ -6,6 +6,7 @@
             android:thicknessRatio="8"
             android:useLevel="false">
             <solid android:color="#DDD" />
+            <stroke android:width="5dp" android:color="@color/himmelsklila" />
         </shape>
     </item>
     <item>
@@ -20,6 +21,7 @@
                     android:endColor="@color/green"
                     android:startColor="@color/green"
                     android:type="sweep" />
+                <stroke android:width="5dp" android:color="@color/himmelsklila"/>
             </shape>
         </rotate>
     </item>

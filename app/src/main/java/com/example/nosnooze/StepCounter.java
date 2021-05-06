@@ -30,7 +30,8 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         progressText = findViewById(R.id.progress_text);
         progressBar = findViewById(R.id.progress_bar);
-        String id = getIntent().getStringExtra("id");
+        TextView currentTime = findViewById(R.id.current_time);
+        currentTime.setText(getIntent().getStringExtra("time"));
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
@@ -61,7 +62,6 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
             }
         }
     }
-
 
     @Override
     protected void onResume() {
