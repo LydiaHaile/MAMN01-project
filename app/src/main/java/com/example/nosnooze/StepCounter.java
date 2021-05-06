@@ -19,8 +19,8 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
     private ProgressBar progressBar;
     private Sensor stepCounterSensor;
     private SensorManager sensorManager;
-    private int steps = -1;
-    int progress = -10;
+    private int steps = 0;
+    private int progress = 0;
     private double MagnitudePrevious = 0;
 
     @Override

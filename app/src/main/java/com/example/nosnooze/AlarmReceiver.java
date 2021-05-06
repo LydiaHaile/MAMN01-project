@@ -41,6 +41,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         serviceIntent.putExtra("extra", get_your_string);
         context.startService(serviceIntent);
 
+        //lägg in vibrationer omedelbums
+
+
         if (get_your_interaction == 1) {
             //PHOTO SCAN
             Intent methodIntent = new Intent(context, PhotoScan.class);
@@ -58,7 +61,12 @@ public class AlarmReceiver extends BroadcastReceiver {
             methodIntent.putExtra("time", alarm.getTime());
             sendNotification(methodIntent, alarm, context);
             context.startActivity(methodIntent);
-        } else {
+        } else if (get_your_interaction == 4) {
+            Intent methodIntent = new Intent(context, PhoneShake.class);
+            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            methodIntent.putExtra("time", alarm.getTime());
+            context.startActivity(methodIntent);
+        } else  {
             //NOTHING HAPPENS
         }
     }

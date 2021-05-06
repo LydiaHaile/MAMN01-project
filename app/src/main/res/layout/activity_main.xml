@@ -10,14 +10,14 @@
 
     <ImageView
         android:id="@+id/arrow"
-        android:layout_width="610dp"
-        android:layout_height="330dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:contentDescription="EnPil"
         android:src="@raw/pil2"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="EnPil" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"

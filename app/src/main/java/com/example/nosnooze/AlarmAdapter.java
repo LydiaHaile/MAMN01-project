@@ -108,7 +108,11 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         new AlertDialog.Builder(context)
                 .setTitle("Delete Alarm")
                 .setMessage("Do you really want to delete alarm for " + alarm.getTime())
-                .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> mainActivity.removeAlarm(position))
+                .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> {
+                    mainActivity.removeAlarm(position);
+                    disableAlarm(alarm);
+                } )
                 .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
     }
+
 }
