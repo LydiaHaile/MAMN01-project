@@ -28,6 +28,7 @@ public class PhotoScan extends AppCompatActivity {
 
     private int maxDifference = 1000;
     private int[] capturedColors, generatedColors;
+    ImageView snappedPhoto;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -35,7 +36,7 @@ public class PhotoScan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_scan);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
+        snappedPhoto = findViewById(R.id.picture);
         Button snapButton = findViewById(R.id.snap_button);
         View startColor = findViewById(R.id.imageView);
         Random rand = new Random();
@@ -66,7 +67,7 @@ public class PhotoScan extends AppCompatActivity {
         if (requestCode == 100) {
             Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
             this.capturedColors = getAverageColors(capturedImage);
-            Log.d("lazydebugging", "PLEASE WIADJHKASJDH " + getDifference());
+            snappedPhoto.setImageBitmap(capturedImage);
         }
     }
 

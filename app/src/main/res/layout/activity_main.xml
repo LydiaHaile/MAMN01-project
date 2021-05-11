@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/arrow"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="100dp"
         android:contentDescription="EnPil"
         android:src="@raw/pil2"

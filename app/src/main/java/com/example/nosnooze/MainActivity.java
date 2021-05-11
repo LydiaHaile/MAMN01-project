@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         alarmList = findViewById(R.id.alarm_list);
         alarmAdapter = new AlarmAdapter(this, alarms);
         alarmList.setAdapter(alarmAdapter);
-        addAlarm(new Alarm("08:00", 123, 1, Calendar.getInstance()));
-        addAlarm(new Alarm("08:15", 321, 2, Calendar.getInstance()));
+        //addAlarm(new Alarm("08:00", 123, 1, Calendar.getInstance()));
+        //addAlarm(new Alarm("08:15", 321, 2, Calendar.getInstance()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

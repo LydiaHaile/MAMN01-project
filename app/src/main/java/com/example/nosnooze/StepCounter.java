@@ -45,7 +45,7 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
         double MagnitudeDelta = Magnitude - MagnitudePrevious;
         MagnitudePrevious = Magnitude;
 
-        if (MagnitudeDelta > 1) {
+        if (MagnitudeDelta > 3) {
             steps++;
             progress += 10;
             progressText.setText(steps + "/10");
