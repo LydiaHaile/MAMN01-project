@@ -41,7 +41,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         serviceIntent.putExtra("extra", get_your_string);
         context.startService(serviceIntent);
 
-        //lägg in vibrationer omedelbums
 
 
         if (get_your_interaction == 1) {
@@ -49,11 +48,13 @@ public class AlarmReceiver extends BroadcastReceiver {
             Intent methodIntent = new Intent(context, PhotoScan.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(methodIntent);
+            createNotification(methodIntent, context);
         } else if (get_your_interaction == 2) {
             //MATCH NOTE
             Intent methodIntent = new Intent(context, BackgroundService.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(methodIntent);
+            createNotification(methodIntent, context);
         } else if (get_your_interaction == 3) {
             //TAKE STEPS
             Intent methodIntent = new Intent(context, StepCounter.class);
@@ -61,22 +62,25 @@ public class AlarmReceiver extends BroadcastReceiver {
             methodIntent.putExtra("time", alarm.getTime());
             sendNotification(methodIntent, alarm, context);
             context.startActivity(methodIntent);
+            createNotification(methodIntent, context);
         } else if (get_your_interaction == 4) {
             Intent methodIntent = new Intent(context, PhoneShake.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
+            createNotification(methodIntent, context);
         } else if (get_your_interaction == 5) {
             Intent methodIntent = new Intent(context, SortNumbers.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
+            createNotification(methodIntent, context);
         } else  {
             //NOTHING HAPPENS
         }
     }
 
-    public void sendNotification(Intent intent, Alarm alarm, Context context) {
+    public void sendNotification(Intent intent, Alarm alarm, Context context) { //används ej?
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channelID")
@@ -89,5 +93,24 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Notification notification = builder.build();
         NotificationManagerCompat.from(context).notify(0, notification);
+    }
+
+    private void createNotification(Intent intent, Context context){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "My Notification");
+        //Intent notificationIntent = new Intent(context.getApplicationContext(), AlarmSetter.class);
+        PendingIntent notificationPendingIntent = PendingIntent.getActivity(context,0, intent,0);
+        builder.setContentTitle("Wake up!")
+                .setContentText("Click here to turn off alarm!")
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true);
+        NotificationManagerCompat manageCompat = NotificationManagerCompat.from(context);
+        manageCompat.notify(1, builder.build());
     }
 }

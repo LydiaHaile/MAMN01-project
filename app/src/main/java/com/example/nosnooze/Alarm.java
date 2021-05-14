@@ -10,9 +10,9 @@ public class Alarm implements Serializable {
     private final String PHOTO_SCAN = " Disable alarm by matching color in photo";
     private final String MATCH_NOTE = " Disable alarm by matching the note";
     private final String TAKE_STEPS = " Disable alarm by taking 10 steps";
-    private final String SHAKE_PHONE = " Disable phone by shaking your phone";
-    private final String SORT_NUMBERS = " Disable phone by sorting numbers";
-    private final String TILT_PHONE = " Disable phone by tilting your phone";
+    private final String SHAKE_PHONE = " Disable alarm by shaking your phone";
+    private final String SORT_NUMBERS = " Disable alarm by sorting numbers";
+    private final String TILT_PHONE = " Disable alarm by tilting your phone";
 
     private Calendar calendar;
     private boolean active = true;
