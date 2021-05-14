@@ -66,6 +66,11 @@ public class AlarmReceiver extends BroadcastReceiver {
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
+        } else if (get_your_interaction == 5) {
+            Intent methodIntent = new Intent(context, SortNumbers.class);
+            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            methodIntent.putExtra("time", alarm.getTime());
+            context.startActivity(methodIntent);
         } else  {
             //NOTHING HAPPENS
         }

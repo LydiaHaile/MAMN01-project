@@ -8,6 +8,7 @@
         <item>Turn off alarm by matching the note</item>
         <item>Turn off the alarm by taking 10 steps</item>
         <item>Turn off the alarm by shaking the phone</item>
+        <item>Turn off the alarm by sorting numbers</item>
     </string-array>
 
 </resources>

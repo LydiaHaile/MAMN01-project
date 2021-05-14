@@ -15,16 +15,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoSnooze">
-        <activity android:name=".PhotoScan" android:screenOrientation="portrait"></activity>
-        <activity android:name=".PhoneShake" android:screenOrientation="portrait"/>
-        <activity android:name=".PhoneTilt" android:screenOrientation="portrait"/>
-        <activity android:name=".AlarmHandler" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".PhotoScan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PhoneShake"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PhoneTilt"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AlarmHandler"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true" />
 
+        <activity android:name=".SortNumbers"/>
         <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
         <activity android:name=".StepCounter" />
