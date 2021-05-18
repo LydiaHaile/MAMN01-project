@@ -48,6 +48,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
+        TextView currentTime = findViewById(R.id.current_time);
+        currentTime.setText(getIntent().getStringExtra("time"));
 
         image = (ImageView) findViewById(R.id.image);
         header = (TextView) findViewById(R.id.header);
