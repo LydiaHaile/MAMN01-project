@@ -33,11 +33,10 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     private TextView test2;
     private TextView test3;
 
-    private int counter = 0;
     private int[] combination = new int[3];
-    private boolean[] foundCombinations = new boolean[3];
-    int X = 0;
-
+    private boolean[] foundCombination = new boolean[3];
+    private int X;
+    private int counter = 0;
 
     private float currentDegree = 0f;
 
@@ -61,22 +60,23 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         header.setText("To turn off the alarm, unlock the lock by " +
                 "turning your phone and find the combination");
 
+        X = 0;
+
         //RANDOMIZE COMBINATION AND SAVE IN THE ARRAY COMBINATION
         Random rand = new Random();
         for (int i = 0; i < 3; i++) {
             combination[i] = rand.nextInt(100);
         }
 
-        for (int a = 0; a < 3; a++) {
-            foundCombinations[a] = false;
+        for (int i = 0; i < 3; i++) {
+            foundCombination[i] = false;
         }
 
         //DISPLAY COMBINATIONS IN VIEW
-        combinationView.setText("Number " + X+1 + "in combination: " + combination[0]);
+        combinationView.setText("Number 0 " + "in combination: " + combination[0]);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        //mediaPlayer = MediaPlayer.create(this, R.raw.sound); //FIND UNLOCKING SOUND
     }
 
     @Override
@@ -114,26 +114,21 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         currentDegree = -degree;
 
         header.setText("" + Math.round(degree/3.6));
+        Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
 
         if(Math.round(degree/3.6) == combination[X]) {
-            foundCombinations[X] = true;
             feedback();
+            foundCombination[X] = true;
             X++;
 
             if(X < 3) {
                 combinationView.setText("Number " + (X) + "in combination: " + combination[X]);
             } else {
-                combinationView.setText("");
+                combinationView.setText(" ");
             }
         }
 
         if(X == 3) {
-
-            try {
-                Thread.sleep(4000);
-            } catch(InterruptedException ex) {
-                Toast.makeText(this, "DID NOT WORK", Toast.LENGTH_SHORT).show();
-            }
             combinationView.setTextColor(Color.GREEN);
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
@@ -155,7 +150,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         } else if (X == 1) {
             test2.setTextColor(Color.GREEN);
             test2.setText("" + combination[1]);
-        } else if (X == 2) {
+        } else {
             test3.setTextColor(Color.GREEN);
             test3.setText("" + combination[2]);
         }
