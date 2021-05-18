@@ -115,6 +115,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentText("Click here to turn off alarm!")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentIntent(notificationPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true);
         NotificationManagerCompat manageCompat = NotificationManagerCompat.from(context);
         manageCompat.notify(1, builder.build());
