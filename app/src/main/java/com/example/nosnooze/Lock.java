@@ -72,11 +72,10 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
 
         //DISPLAY COMBINATIONS IN VIEW
-        combinationView.setText("Number " + X+1 + "in combination: " + combination[0]);
+        combinationView.setText("Number 0 " + "in combination: " + combination[0]);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        //mediaPlayer = MediaPlayer.create(this, R.raw.sound); //FIND UNLOCKING SOUND
     }
 
     @Override
@@ -128,12 +127,6 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
 
         if(X == 3) {
-
-            try {
-                Thread.sleep(4000);
-            } catch(InterruptedException ex) {
-                Toast.makeText(this, "DID NOT WORK", Toast.LENGTH_SHORT).show();
-            }
             combinationView.setTextColor(Color.GREEN);
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
@@ -155,7 +148,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         } else if (X == 1) {
             test2.setTextColor(Color.GREEN);
             test2.setText("" + combination[1]);
-        } else if (X == 2) {
+        } else {
             test3.setTextColor(Color.GREEN);
             test3.setText("" + combination[2]);
         }
