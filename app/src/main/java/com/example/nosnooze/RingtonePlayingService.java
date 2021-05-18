@@ -34,7 +34,7 @@ public class RingtonePlayingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        long[] pattern = {0, 1000, 1000};
+        //long[] pattern = {0, 1000, 1000};
 
         String state = intent.getExtras().getString("extra");
         assert state != null;
@@ -55,14 +55,14 @@ public class RingtonePlayingService extends Service {
             mediaSong.start();
             this.isRunning= true;
             this.startId = 0;
-            vibrator.vibrate(pattern, 0);
+            //vibrator.vibrate(pattern, 0);
 
         } else if (this.isRunning && startId == 0){
             mediaSong.stop();
             mediaSong.reset();
             this.isRunning = false;
             this.startId = 0;
-            vibrator.cancel();
+            //vibrator.cancel();
         } else if (!this.isRunning && startId == 0){
             this.isRunning = false;
             this.startId = 0;

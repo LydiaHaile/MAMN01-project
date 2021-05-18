@@ -35,7 +35,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
 
     private int counter = 0;
     private int[] combination = new int[3];
-    private int[] foundCombinations = new int[3];
+    private boolean[] foundCombinations = new boolean[3];
+    int X = 0;
 
 
     private float currentDegree = 0f;
@@ -67,11 +68,11 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
 
         for (int a = 0; a < 3; a++) {
-            foundCombinations[a] = -1;
+            foundCombinations[a] = false;
         }
 
         //DISPLAY COMBINATIONS IN VIEW
-        combinationView.setText("" + combination[0] + " " + combination[1] + " " + combination[2]);
+        combinationView.setText("Number " + X+1 + "in combination: " + combination[0]);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -114,10 +115,32 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
 
         header.setText("" + Math.round(degree/3.6));
 
+        if(Math.round(degree/3.6) == combination[X]) {
+            foundCombinations[X] = true;
+            vibrate();
+            X++;
+
+            if(X < 3) {
+                combinationView.setText("Number " + (X+1) + "in combination: " + combination[X]);
+            } else {
+                combinationView.setText("");
+            }
+        }
+
+        if(X == 3) {
+            combinationView.setTextColor(Color.GREEN);
+            Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+            serviceIntent.putExtra("extra", "alarm_off");
+            this.startService(serviceIntent);
+            Intent returnIntent = new Intent(this, MainActivity.class);
+            this.startActivity(returnIntent);
+        }
+
         //CHECK IF ANY COMBINATION IS FOUND. IF FOUND: PHONE VIBRATES AND FOUND COMBINATION IS ADDED IN ARRAY FOUND_COMBINATIONS;
-        if (Math.round(degree/3.6) == combination[0]) {
+        /*if (Math.round(degree/3.6) == combination[0]) {
             if(foundCombinations[0] == -1) {
                 test1.setText("Hold phone still 3 sec.");
+
 
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -172,18 +195,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
                         3000
                 );
             }
-        }
-
-        if(counter == 3){
-            combinationView.setTextColor(Color.GREEN);
-
-            Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
-            serviceIntent.putExtra("extra", "alarm_off");
-            this.startService(serviceIntent);
-            Intent returnIntent = new Intent(this, MainActivity.class);
-            this.startActivity(returnIntent);
-        }
-
+        }*/
     }
 
     @Override
