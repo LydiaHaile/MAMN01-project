@@ -121,7 +121,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             X++;
 
             if(X < 3) {
-                combinationView.setText("Number " + (X+1) + "in combination: " + combination[X]);
+                combinationView.setText("Number " + (X) + "in combination: " + combination[X]);
             } else {
                 combinationView.setText("");
             }
