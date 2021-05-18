@@ -33,11 +33,10 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     private TextView test2;
     private TextView test3;
 
-    private int counter = 0;
     private int[] combination = new int[3];
-    private boolean[] foundCombinations = new boolean[3];
-    int X = 0;
-
+    private boolean[] foundCombination = new boolean[3];
+    private int X;
+    private int counter = 0;
 
     private float currentDegree = 0f;
 
@@ -61,14 +60,16 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         header.setText("To turn off the alarm, unlock the lock by " +
                 "turning your phone and find the combination");
 
+        X = 0;
+
         //RANDOMIZE COMBINATION AND SAVE IN THE ARRAY COMBINATION
         Random rand = new Random();
         for (int i = 0; i < 3; i++) {
             combination[i] = rand.nextInt(100);
         }
 
-        for (int a = 0; a < 3; a++) {
-            foundCombinations[a] = false;
+        for (int i = 0; i < 3; i++) {
+            foundCombination[i] = false;
         }
 
         //DISPLAY COMBINATIONS IN VIEW
@@ -113,16 +114,17 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         currentDegree = -degree;
 
         header.setText("" + Math.round(degree/3.6));
+        Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
 
         if(Math.round(degree/3.6) == combination[X]) {
-            foundCombinations[X] = true;
             feedback();
+            foundCombination[X] = true;
             X++;
 
             if(X < 3) {
                 combinationView.setText("Number " + (X) + "in combination: " + combination[X]);
             } else {
-                combinationView.setText("");
+                combinationView.setText(" ");
             }
         }
 
