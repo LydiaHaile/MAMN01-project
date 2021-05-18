@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoSnooze">
-
+        <activity android:name=".Lock"></activity>
         <activity
             android:name=".PhotoScan"
             android:screenOrientation="portrait" />
@@ -34,7 +34,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".SortNumbers"/>
+        <activity android:name=".SortNumbers" />
         <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
         <activity android:name=".StepCounter" />

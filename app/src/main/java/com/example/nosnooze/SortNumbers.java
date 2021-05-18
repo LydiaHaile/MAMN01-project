@@ -159,4 +159,8 @@ public class SortNumbers extends AppCompatActivity {
 
     }
 
+    private void findRightPlace(){
+
+    }
+
 }

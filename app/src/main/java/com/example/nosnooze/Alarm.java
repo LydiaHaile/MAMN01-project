@@ -13,6 +13,7 @@ public class Alarm implements Serializable {
     private final String SHAKE_PHONE = " Disable alarm by shaking your phone";
     private final String SORT_NUMBERS = " Disable alarm by sorting numbers";
     private final String TILT_PHONE = " Disable alarm by tilting your phone";
+    private final String LOCK = " Disable phone by unlocking the lock";
 
     private Calendar calendar;
     private boolean active = true;
@@ -45,6 +46,8 @@ public class Alarm implements Serializable {
             return SHAKE_PHONE;
         } else if (this.method == 5){
             return SORT_NUMBERS;
+        } else if (this.method == 6) {
+            return LOCK;
         } else {
             return "hej";
         }
