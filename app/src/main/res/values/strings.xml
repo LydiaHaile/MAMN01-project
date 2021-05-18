@@ -9,6 +9,7 @@
         <item>Turn off the alarm by taking 10 steps</item>
         <item>Turn off the alarm by shaking the phone</item>
         <item>Turn off the alarm by sorting numbers</item>
+        <item>Turn off the alarm by unlocking lock</item>
     </string-array>
 
 </resources>
