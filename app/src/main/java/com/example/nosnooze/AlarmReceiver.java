@@ -60,7 +60,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             Intent methodIntent = new Intent(context, StepCounter.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
-            sendNotification(methodIntent, alarm, context);
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);
         } else if (get_your_interaction == 4) {
@@ -85,7 +84,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             //NOTHING HAPPENS
         }
     }
-
+/*
     public void sendNotification(Intent intent, Alarm alarm, Context context) { //används ej?
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
@@ -93,30 +92,32 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.circle)
                 .setContentTitle("1")
                 .setContentText("2")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_MAX);
         //.setContentIntent(pendingIntent)
         //.setAutoCancel(true);
 
         Notification notification = builder.build();
         NotificationManagerCompat.from(context).notify(0, notification);
     }
-
+*/
     private void createNotification(Intent intent, Context context){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("alarm", "alarm", NotificationManager.IMPORTANCE_LOW);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             NotificationManager manager = context.getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "My Notification");
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alarm");
         //Intent notificationIntent = new Intent(context.getApplicationContext(), AlarmSetter.class);
         PendingIntent notificationPendingIntent = PendingIntent.getActivity(context,0, intent,0);
         builder.setContentTitle("Wake up!")
                 .setContentText("Click here to turn off alarm!")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentIntent(notificationPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(Notification.PRIORITY_LOW)
                 .setAutoCancel(true);
+
         NotificationManagerCompat manageCompat = NotificationManagerCompat.from(context);
         manageCompat.notify(1, builder.build());
     }

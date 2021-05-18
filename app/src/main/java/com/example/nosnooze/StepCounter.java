@@ -3,11 +3,13 @@ package com.example.nosnooze;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,9 +24,11 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
     private int steps = 0;
     private int progress = 0;
     private double MagnitudePrevious = 0;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_counter);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -34,6 +38,7 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
         currentTime.setText(getIntent().getStringExtra("time"));
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     }
 
     @Override
@@ -45,11 +50,12 @@ public class StepCounter extends AppCompatActivity implements SensorEventListene
         double MagnitudeDelta = Magnitude - MagnitudePrevious;
         MagnitudePrevious = Magnitude;
 
-        if (MagnitudeDelta > 3) {
+        if (MagnitudeDelta > 5) {
             steps++;
             progress += 10;
             progressText.setText(steps + "/10");
             progressBar.setProgress(progress);
+            vibrator.vibrate(300);
             //MAYBE PLAY A 'DING'
             if(steps >= 10){
                 //Stop playing music

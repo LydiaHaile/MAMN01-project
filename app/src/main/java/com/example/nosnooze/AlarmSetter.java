@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,16 +37,18 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
     private String time = "00:00";
     private Alarm alarm;
     private final MainActivity ma = new MainActivity();
+    private Random random;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_setter);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         Button cancelButton = findViewById(R.id.abort_alarm);
         timeText = findViewById(R.id.time);
+        random = new Random();
 
         cancelButton.setOnClickListener(v -> {
             Intent goBackIntent = new Intent(this, MainActivity.class);
@@ -70,7 +73,6 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         Button buttonCreateAlarm = findViewById(R.id.create_alarm);
         buttonCreateAlarm.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -117,7 +119,11 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getId() == R.id.interaction_spinner) {
-            selectedInteraction = position+1;
+            selectedInteraction = position;
+        }
+        if(selectedInteraction == 0){
+            int numberOfInteractions = parent.getAdapter().getCount()-1;
+            selectedInteraction = random.nextInt(numberOfInteractions)+1;
         }
     }
 
