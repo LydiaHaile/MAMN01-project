@@ -3,11 +3,13 @@ package com.example.nosnooze;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,9 +24,11 @@ public class PhoneShake extends AppCompatActivity implements SensorEventListener
     private ProgressBar progressBar;
     int progress;
     private TextView progressText;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_shake);
         sensorM = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -34,6 +38,7 @@ public class PhoneShake extends AppCompatActivity implements SensorEventListener
         currentTime.setText(getIntent().getStringExtra("time"));
         progressBar = findViewById(R.id.progress_bar);
         progressText = findViewById(R.id.progress_text);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
 
 
@@ -53,6 +58,7 @@ public class PhoneShake extends AppCompatActivity implements SensorEventListener
 
             float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
             if (speed > SHAKE_THRESHOLD) {
+                vibrator.vibrate(300);
                 if(progress<100){ //kan annars gå över 100 konstigt nog
                     progress +=10;
                 }
