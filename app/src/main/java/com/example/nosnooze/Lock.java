@@ -117,7 +117,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
 
         if(Math.round(degree/3.6) == combination[X]) {
             foundCombinations[X] = true;
-            vibrate();
+            feedback();
             X++;
 
             if(X < 3) {
@@ -203,7 +203,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         //not used
     }
 
-    private void vibrate() {
+    private void feedback() {
+
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));

@@ -94,8 +94,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle("1")
                 .setContentText("2")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                //.setContentIntent(pendingIntent)
-                //.setAutoCancel(true);
+        //.setContentIntent(pendingIntent)
+        //.setAutoCancel(true);
 
         Notification notification = builder.build();
         NotificationManagerCompat.from(context).notify(0, notification);
