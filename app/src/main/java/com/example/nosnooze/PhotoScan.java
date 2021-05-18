@@ -11,15 +11,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,9 +25,9 @@ import java.util.Random;
 
 public class PhotoScan extends AppCompatActivity {
 
-    private int maxDifference = 1000;
-    private int[] capturedColors, generatedColors;
-    ImageView snappedPhoto;
+    ImageView startColor;
+    int colorMatch;
+    int limit = 100;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -38,17 +36,13 @@ public class PhotoScan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_scan);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        snappedPhoto = findViewById(R.id.picture);
-        Button snapButton = findViewById(R.id.snap_button);
-        View startColor = findViewById(R.id.imageView);
-        Random rand = new Random();
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-        int randomColor = Color.rgb(r, g, b);
-        this.generatedColors = getAverageColors(loadBitmapFromView(startColor));
-        startColor.setBackgroundColor(randomColor);
-
+        startColor = findViewById(R.id.imageView);
+        generateColor();
+        ImageButton snapButton = findViewById(R.id.snap_button);
+        Button genNewColor = findViewById(R.id.gen_color);
+        genNewColor.setOnClickListener(v -> {
+            generateColor();
+        });
         if (ContextCompat.checkSelfPermission(PhotoScan.this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(PhotoScan.this,
@@ -68,45 +62,59 @@ public class PhotoScan extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
             Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
-            this.capturedColors = getAverageColors(capturedImage);
-            snappedPhoto.setImageBitmap(capturedImage);
+            int compositeColor = getAverageColor(capturedImage);
+            ImageView compositeColorView = findViewById(R.id.composite_color);
+            compositeColorView.setBackgroundColor(compositeColor);
+
+            if (compareColors(compositeColor, colorMatch) < limit) {
+                Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+                serviceIntent.putExtra("extra", "alarm_off");
+                this.startService(serviceIntent);
+                Intent returnIntent = new Intent(this, MainActivity.class);
+                this.startActivity(returnIntent);
+            } else {
+                TextView retryPrompt = findViewById(R.id.retry_prompt);
+                retryPrompt.setText("Try again!");
+            }
+
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private int[] getAverageColors(Bitmap bitmap) {
-        int R = 0;
-        int G = 0;
-        int B = 0;
+    private int getAverageColor(Bitmap bitmap) {
+        int red = 0;
+        int green = 0;
+        int blue = 0;
+        int pixelCount = 0;
         int height = bitmap.getHeight();
         int width = bitmap.getWidth();
-        int n = 0;
+
         int[] pixels = new int[width * height];
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        for (int color : pixels) {
-            R += Color.red(color);
-            G += Color.green(color);
-            B += Color.blue(color);
-            n++;
+        for (int color: pixels) {
+            pixelCount++;
+            red+= Color.red(color);
+            green += Color.green(color);
+            blue += Color.blue(color);
         }
-        return new int[]{R/n, G/n, B/n};
+        return Color.rgb(red / pixelCount, green / pixelCount, blue / pixelCount);
     }
 
-    private int getDifference() {
-        int difference = 0;
-        for (int i = 0; i < 3; i++) {
-            difference += Math.abs(generatedColors[i] - capturedColors[i]);
-        }
-        return difference;
+    private String getRGB(int color) {
+        return "R: " + Color.red(color) + "G: " + Color.green(color) + "B: " + Color.blue(color);
     }
 
-    private Bitmap loadBitmapFromView(View v) {
-        Bitmap b = Bitmap.createBitmap( v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-        v.draw(c);
-        return b;
+    private void generateColor() {
+        Random rand = new Random();
+        int color = Color.rgb(rand.nextInt(), rand.nextInt(), rand.nextInt());
+        startColor.setBackgroundColor(color);
+        colorMatch = color;
     }
 
-
+    private int compareColors(int color1, int color2) {
+        int redDiff = Math.abs(Color.red(color1) - Color.red(color2));
+        int greenDiff = Math.abs(Color.green(color1) - Color.green(color2));
+        int blueDiff = Math.abs(Color.blue(color1) - Color.blue(color2));
+        return redDiff + greenDiff + blueDiff;
+    }
 }

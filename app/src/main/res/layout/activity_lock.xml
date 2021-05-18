@@ -4,17 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Lock">
+    tools:context=".Lock"
+    android:background="@color/light_light_blue">
 
     <TextView
         android:id="@+id/current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:fontFamily="@font/lobster"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/row_background"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:text="08:00"
         android:textColor="@color/himmelsklila"
         android:textSize="60sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintVertical_bias="0.602" />
 
     <TextView
         android:id="@+id/aCombination2"
