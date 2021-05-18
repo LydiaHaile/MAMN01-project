@@ -18,9 +18,9 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Vibrator;
-import android.widget.Toast;
-
 import java.util.Random;
+
+import android.widget.Toast;
 
 
 public class Lock extends AppCompatActivity implements SensorEventListener {
@@ -128,6 +128,12 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
 
         if(X == 3) {
+
+            try {
+                Thread.sleep(4000);
+            } catch(InterruptedException ex) {
+                Toast.makeText(this, "DID NOT WORK", Toast.LENGTH_SHORT).show();
+            }
             combinationView.setTextColor(Color.GREEN);
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
@@ -135,67 +141,6 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             Intent returnIntent = new Intent(this, MainActivity.class);
             this.startActivity(returnIntent);
         }
-
-        //CHECK IF ANY COMBINATION IS FOUND. IF FOUND: PHONE VIBRATES AND FOUND COMBINATION IS ADDED IN ARRAY FOUND_COMBINATIONS;
-        /*if (Math.round(degree/3.6) == combination[0]) {
-            if(foundCombinations[0] == -1) {
-                test1.setText("Hold phone still 3 sec.");
-
-
-                new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                if (Math.round(degree/3.6) == combination[0]) {
-                                    test1.setText("" + Math.round(degree / 3.6));
-                                    foundCombinations[0] = (int) Math.round(degree / 3.6);
-                                    counter++;
-                                    vibrate();
-                                }
-                            }
-                        },
-                        3000
-                );
-            }
-        } else if (Math.round(degree/3.6) == combination[1]) {
-            if(foundCombinations[1] == -1) {
-                test2.setText("Hold phone still 3 sec.");
-
-                new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                if (Math.round(degree/3.6) == combination[1]) {
-                                    test2.setText("" + Math.round(degree / 3.6));
-                                    foundCombinations[1] = (int)Math.round(degree/3.6);
-                                    counter++;
-                                    vibrate();
-                                }
-                            }
-                        },
-                        3000
-                );
-            }
-        } else if (Math.round(degree/3.6) == combination[2]) {
-            if(foundCombinations[2] == -1) {
-                test3.setText("Hold phone still 3 sec.");
-
-                new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                if (Math.round(degree/3.6) == combination[1]) {
-                                    test3.setText("" + Math.round(degree/3.6) );
-                                    foundCombinations[2] = (int) Math.round(degree / 3.6);
-                                    counter++;
-                                    vibrate();
-                                }
-                            }
-                        },
-                        3000
-                );
-            }
-        }*/
     }
 
     @Override
@@ -204,6 +149,16 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     }
 
     private void feedback() {
+        if(X == 0) {
+            test1.setTextColor(Color.GREEN);
+            test1.setText("" + combination[0]);
+        } else if (X == 1) {
+            test2.setTextColor(Color.GREEN);
+            test2.setText("" + combination[1]);
+        } else if (X == 2) {
+            test3.setTextColor(Color.GREEN);
+            test3.setText("" + combination[2]);
+        }
 
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -214,47 +169,3 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
     }
 }
-        /*
-        private void changeColorBackground(String color) {
-            if(color == "GREEN") {
-                getWindow().getDecorView().setBackgroundColor(Color.GREEN);
-            } else if(color == "WHITE"){
-                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-            }
-        }
-}
-
-       try {
-        int chosenHeading = Integer.parseInt(input.getText().toString());
-        directionTitle.setText("Your direction: " + chosenHeading + "°");
-
-        if(chosenHeading >= 0 && chosenHeading <= 360) {
-
-            int lowerBound = (chosenHeading - 15);
-            int higherBound = (chosenHeading + 15);
-
-            if(degree > lowerBound && degree < higherBound){
-                changeColorBackground("GREEN");
-                if(degree == chosenHeading) {
-                    launchVibrationAndSound();
-                }
-            } else {
-                changeColorBackground("WHITE");
-            }
-        } else {
-            heading.setText("You can only choose 0-365°");
-            changeColorBackground("WHITE");
-        }
-
-    } catch (NumberFormatException e) {
-        directionTitle.setText("Your direction: 360°");
-
-        if(degree > 345 || degree < 15){
-            changeColorBackground("GREEN");
-            if(degree == 360) {
-                launchVibrationAndSound();
-            }
-        } else {
-            changeColorBackground("WHITE");
-        }
-    }*/
