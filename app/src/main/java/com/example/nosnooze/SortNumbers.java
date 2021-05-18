@@ -42,6 +42,8 @@ public class SortNumbers extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort_numbers);
+        TextView currentTime = findViewById(R.id.current_time);
+        currentTime.setText(getIntent().getStringExtra("time"));
 
         //FIND TEXT-VIEW BY ID
         first = (Button)findViewById(R.id.firstNumber);

@@ -57,8 +57,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         test2 = (TextView) findViewById(R.id.aCombination2);
         test3 = (TextView) findViewById(R.id.aCombination3);
 
-        header.setText("To turn off the alarm, unlock the lock by " +
-                "turning your phone and find the combination");
+        //header.setText("To turn off the alarm, unlock the lock by " +
+                //"turning your phone and find the combination");
 
         X = 0;
 
@@ -73,7 +73,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         }
 
         //DISPLAY COMBINATIONS IN VIEW
-        combinationView.setText("Number 0 " + "in combination: " + combination[0]);
+        combinationView.setText("First number in combination: " + combination[0]);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -113,7 +113,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         image.startAnimation(ra);
         currentDegree = -degree;
 
-        header.setText("" + Math.round(degree/3.6));
+        //header.setText("Currently at: " + Math.round(degree/3.6));
         Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
 
         if(Math.round(degree/3.6) == combination[X]) {
@@ -122,13 +122,14 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             X++;
 
             if(X < 3) {
-                combinationView.setText("Number " + (X) + "in combination: " + combination[X]);
+                combinationView.setText("Next number in combination: " + combination[X]);
             } else {
                 combinationView.setText(" ");
             }
         }
 
         if(X == 3) {
+            test3.setTextColor(Color.RED);
             combinationView.setTextColor(Color.GREEN);
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
@@ -144,17 +145,6 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     }
 
     private void feedback() {
-        if(X == 0) {
-            test1.setTextColor(Color.GREEN);
-            test1.setText("" + combination[0]);
-        } else if (X == 1) {
-            test2.setTextColor(Color.GREEN);
-            test2.setText("" + combination[1]);
-        } else {
-            test3.setTextColor(Color.GREEN);
-            test3.setText("" + combination[2]);
-        }
-
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -162,5 +152,17 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             //deprecated in API 26
             vibrator.vibrate(500);
         }
+
+        if(X == 0) {
+            test1.setTextColor(Color.GREEN);
+            test1.setText("" + combination[0]);
+        } else if (X == 1) {
+            test2.setTextColor(Color.GREEN);
+            test2.setText("" + combination[1]);
+        } else {
+            test2.setTextColor(Color.GREEN);
+            test2.setText("" + combination[2]);
+        }
+
     }
 }
