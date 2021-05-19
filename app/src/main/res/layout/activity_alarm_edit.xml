@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlarmSetter"
+    android:background="@color/light_light_blue">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/row_background"
+        android:text="EDIT ALARM"
+        android:textColor="@color/himmelsklila"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <Button
+            android:id="@+id/abort_alarm"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Cancel"
+            android:textColor="@color/himmelsklila"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/create_alarm"
+            android:layout_width="180dp"
+            android:layout_height="34dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:text="Save"
+            android:textColor="@color/himmelsklila"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="298dp"
+        android:layout_height="224dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.668" />
+
+    <Spinner
+        android:id="@+id/interaction_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:background="@drawable/row_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

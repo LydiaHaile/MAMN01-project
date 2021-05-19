@@ -13,27 +13,25 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NoSnooze"
-        android:screenOrientation="portrait" >
-
+        android:theme="@style/Theme.NoSnooze">
+        <activity android:name=".AlarmEdit"></activity>
         <activity
-            android:name=".Lock" />
-        <activity
-            android:name=".PhotoScan" />
-        <activity
-            android:name=".PhoneShake" />
-        <activity
-            android:name=".PhoneTilt" />
-        <activity
-            android:name=".AlarmHandler" />
+            android:name=".AlarmPopup"
+            android:theme="@style/Apptheme.Popup" />
+        <activity android:name=".Lock" />
+        <activity android:name=".PhotoScan" />
+        <activity android:name=".PhoneShake" />
+        <activity android:name=".PhoneTilt" />
+        <activity android:name=".AlarmHandler" />
 
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".SortNumbers"/>
+        <activity android:name=".SortNumbers" />
         <activity android:name=".SensorPage" />
         <activity android:name=".AlarmSetter" />
         <activity android:name=".StepCounter" />

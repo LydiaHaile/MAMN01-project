@@ -31,6 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public Alarm getAlarm(String time) {
         for (Alarm alarm : alarms) {
             if (alarm.getTime().equals(time)) {
@@ -105,5 +107,9 @@ public class MainActivity extends AppCompatActivity {
         }
         //should never happen!
         return alarms.get(0);
+    }
+
+    public ArrayList<Alarm> getAlarms(){
+        return alarms;
     }
 }

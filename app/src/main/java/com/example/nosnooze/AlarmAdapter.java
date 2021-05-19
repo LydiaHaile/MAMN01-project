@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Parcelable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -71,9 +72,12 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                 disableAlarm(alarm);
             }
         });
-        row.setOnLongClickListener(v -> {
-            removeAlarmPopup(alarm, position);
-            return false;
+        row.setOnClickListener(v -> {
+            Intent edit = new Intent(context, AlarmPopup.class);
+            edit.putExtra("alarm", alarm.getId());
+            edit.putExtra("position", "" + position);
+            context.startActivity(edit);
+
         });
         imageButton.setOnClickListener(v -> {
             removeAlarmPopup(alarm, position);
