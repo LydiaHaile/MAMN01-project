@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Parcelable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -69,13 +70,14 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                 alarmTime.setTextColor(Color.GRAY);
                 disableMethod.setTextColor(Color.GRAY);
                 alarm.setActive(false);
-                disableAlarm(alarm);
+                disableAlarm(alarm.getId(), alarm.getTime());
             }
         });
         row.setOnClickListener(v -> {
             Intent edit = new Intent(context, AlarmPopup.class);
-            edit.putExtra("alarm", alarm.getId());
-            edit.putExtra("position", "" + position);
+            edit.putExtra("alarmId", alarm.getId());
+            edit.putExtra("position", position);
+            edit.putExtra("time", alarm.getTime());
             context.startActivity(edit);
 
         });
@@ -85,12 +87,12 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
         return row;
     }
 
-    private void disableAlarm(Alarm alarm) {
+    public void disableAlarm(int alarmId, String alarmTime) { //gjorde om som man inte skickar ett alarm som parameter. enklare för att edita alarm. lite fult kanske.
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarm.getId(), intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
         alarmManager.cancel(pendingIntent);
-        Toast.makeText(context, "Disabled alarm " + alarm.getTime(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Disabled alarm " + alarmTime, Toast.LENGTH_SHORT).show();
     }
 
     public void enableAlarm(Alarm alarm) {
@@ -114,7 +116,7 @@ class AlarmAdapter extends ArrayAdapter<Alarm> {
                 .setMessage("Do you really want to delete alarm for " + alarm.getTime())
                 .setPositiveButton((Html.fromHtml("<font color='#333f4f'>yes</font>")), (dialog, whichButton) -> {
                     mainActivity.removeAlarm(position);
-                    disableAlarm(alarm);
+                    disableAlarm(alarm.getId(), alarm.getTime());
                 } )
                 .setNegativeButton((Html.fromHtml("<font color='#333f4f'>no</font>")), null).show();
     }

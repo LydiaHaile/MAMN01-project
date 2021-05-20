@@ -75,9 +75,12 @@ public class AlarmEdit extends AppCompatActivity implements AdapterView.OnItemSe
             calendar.set(Calendar.SECOND, 0);
             alarm = new Alarm(time, (int) System.currentTimeMillis(),  selectedInteraction, calendar);
 
-            int alarmPos = Integer.parseInt(getIntent().getStringExtra("position"));
-            ma.removeAlarm(alarmPos); // ta väck gamla alarmet. Fixa så den tar bort det gamla intentet också!!
-            Log.d("alarmPos","" + alarmPos);
+            int alarmPos = getIntent().getIntExtra("position",0);
+            int alarmId = getIntent().getIntExtra("alarmId",0);
+            String alarmTime = getIntent().getStringExtra("time");
+            ma.removeAlarm(alarmPos);
+            ma.getAlarmAdapter().disableAlarm(alarmId, alarmTime);
+
 
 
             ma.addAlarm(alarm);
