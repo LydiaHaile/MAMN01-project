@@ -123,10 +123,12 @@ public class AlarmEdit extends AppCompatActivity implements AdapterView.OnItemSe
         if(parent.getId() == R.id.interaction_spinner) {
             selectedInteraction = position;
         }
-        if(selectedInteraction == 0){
+
+        /*if(selectedInteraction == 0){
             int numberOfInteractions = parent.getAdapter().getCount()-1;
             selectedInteraction = random.nextInt(numberOfInteractions)+1;
         }
+        */
     }
 
     @Override

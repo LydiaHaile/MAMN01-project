@@ -13,6 +13,7 @@ public class Alarm implements Serializable {
     private final String SORT_NUMBERS = " Disable alarm by sorting numbers";
     private final String TILT_PHONE = " Disable alarm by tilting your phone";
     private final String LOCK = " Disable phone by unlocking the lock";
+    private final String RANDOM = " Interaction needed will be randomized";
 
     private Calendar calendar;
     private boolean active = true;
@@ -45,6 +46,8 @@ public class Alarm implements Serializable {
             return SORT_NUMBERS;
         } else if (this.method == 5) {
             return LOCK;
+        } else if (this.method == 0){
+            return RANDOM;
         } else {
             return "hej";
         }

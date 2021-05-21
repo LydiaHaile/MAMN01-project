@@ -37,7 +37,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
     private String time = "00:00";
     private Alarm alarm;
     private final MainActivity ma = new MainActivity();
-    private Random random;
+    //private Random random;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -48,7 +48,7 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         Button cancelButton = findViewById(R.id.abort_alarm);
         timeText = findViewById(R.id.time);
-        random = new Random();
+        //random = new Random();
 
         cancelButton.setOnClickListener(v -> {
             Intent goBackIntent = new Intent(this, MainActivity.class);
@@ -121,10 +121,10 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         if(parent.getId() == R.id.interaction_spinner) {
             selectedInteraction = position;
         }
-        if(selectedInteraction == 0){
+        /*if(selectedInteraction == 0){
             int numberOfInteractions = parent.getAdapter().getCount()-1;
             selectedInteraction = random.nextInt(numberOfInteractions)+1;
-        }
+        }*/
     }
 
     @Override

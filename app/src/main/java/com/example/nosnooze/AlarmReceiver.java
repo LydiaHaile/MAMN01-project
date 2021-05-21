@@ -21,8 +21,11 @@ import androidx.core.app.NotificationManagerCompat;
 import java.nio.channels.Channel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 public class AlarmReceiver extends BroadcastReceiver {
+    private Random random;
+    private final int NUMBEROFINTERACTIONS =5; //detta borde vara dynamiskt egentligen då vi ändra i strings.xml
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -32,6 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String time = sdf.format(calendar.getTime());
         Alarm alarm = mainActivity.getAlarm(time);
+        random = new Random();
 
         String get_your_string = intent.getExtras().getString("extra");
         int get_your_interaction = intent.getExtras().getInt("interaction");
@@ -41,8 +45,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         serviceIntent.putExtra("extra", get_your_string);
         context.startService(serviceIntent);
 
-
-
+        if (get_your_interaction == 0){ //Random interaction
+            get_your_interaction = random.nextInt(NUMBEROFINTERACTIONS)+1;
+        }
         if (get_your_interaction == 1) {
             //PHOTO SCAN
             Intent methodIntent = new Intent(context, PhotoScan.class);

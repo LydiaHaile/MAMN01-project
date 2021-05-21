@@ -84,6 +84,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.72" />
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="12dp"
+        android:text="Choose interaction to disable alarm"
+        app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 
