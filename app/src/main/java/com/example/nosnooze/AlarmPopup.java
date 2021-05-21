@@ -38,6 +38,7 @@ public class AlarmPopup extends AppCompatActivity {
         params.y =  -20;
         getWindow().setAttributes(params);
 
+
         alarmId = getIntent().getIntExtra("alarmId",0);
         alarmPos = getIntent().getIntExtra("position",0);
         alarmTime = getIntent().getStringExtra("time");
