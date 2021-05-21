@@ -50,31 +50,25 @@ public class AlarmReceiver extends BroadcastReceiver {
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);
         } else if (get_your_interaction == 2) {
-            //MATCH NOTE
-            Intent methodIntent = new Intent(context, BackgroundService.class);
-            methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(methodIntent);
-            createNotification(methodIntent, context);
-        } else if (get_your_interaction == 3) {
             //TAKE STEPS
             Intent methodIntent = new Intent(context, StepCounter.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);
-        } else if (get_your_interaction == 4) {
+        } else if (get_your_interaction == 3) {
             Intent methodIntent = new Intent(context, PhoneShake.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);
-        } else if (get_your_interaction == 5) {
+        } else if (get_your_interaction == 4) {
             Intent methodIntent = new Intent(context, SortNumbers.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);
-        } else if (get_your_interaction == 6) {
+        } else if (get_your_interaction == 5) {
             Intent methodIntent = new Intent(context, Lock.class);
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             methodIntent.putExtra("time", alarm.getTime());

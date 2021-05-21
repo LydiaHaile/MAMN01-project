@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Vibrator;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     private boolean[] foundCombination = new boolean[3];
     private int X;
     private int counter = 0;
+    private long time = 500;
+    private TimeUnit time1 = TimeUnit.SECONDS;
 
     private float currentDegree = 0f;
 
@@ -46,6 +50,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
         TextView currentTime = findViewById(R.id.current_time);
@@ -118,24 +123,33 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         //header.setText("Currently at: " + Math.round(degree/3.6));
         Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
 
-        if(Math.round(degree/3.6) == combination[X]) {
+        if (Math.round(degree / 3.6) == combination[X]) {
             feedback();
             foundCombination[X] = true;
             X++;
 
-            if(X < 3) {
+            if (X < 3) {
                 combinationView.setText("Next number in combination: " + combination[X]);
             } else {
                 combinationView.setText(" ");
             }
         }
 
-        if(X == 3) {
-            test3.setTextColor(Color.RED);
-            combinationView.setTextColor(Color.GREEN);
+        if (X == 3) {
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
             this.startService(serviceIntent);
+           /* try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+            try {
+                // Calling the sleep method on the object of TimeUnit Class
+                time1.sleep(time);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted Exception Caught" + e);
+            }*/
             Intent returnIntent = new Intent(this, MainActivity.class);
             this.startActivity(returnIntent);
         }
@@ -162,8 +176,9 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             test2.setTextColor(Color.GREEN);
             test2.setText("" + combination[1]);
         } else {
-            test2.setTextColor(Color.GREEN);
-            test2.setText("" + combination[2]);
+            test3.setTextColor(Color.GREEN);
+            test3.setText("" + combination[2]);
+
         }
 
     }

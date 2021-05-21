@@ -8,7 +8,6 @@ import java.util.Calendar;
 public class Alarm implements Serializable {
 
     private final String PHOTO_SCAN = " Disable alarm by matching color in photo";
-    private final String MATCH_NOTE = " Disable alarm by matching the note";
     private final String TAKE_STEPS = " Disable alarm by taking 10 steps";
     private final String SHAKE_PHONE = " Disable alarm by shaking your phone";
     private final String SORT_NUMBERS = " Disable alarm by sorting numbers";
@@ -39,14 +38,12 @@ public class Alarm implements Serializable {
         if (this.method == 1) {
             return PHOTO_SCAN;
         } else if (this.method == 2) {
-            return MATCH_NOTE;
-        } else if (this.method == 3) {
             return TAKE_STEPS;
-        } else if (this.method == 4) {
+        } else if (this.method == 3) {
             return SHAKE_PHONE;
-        } else if (this.method == 5){
+        } else if (this.method == 4){
             return SORT_NUMBERS;
-        } else if (this.method == 6) {
+        } else if (this.method == 5) {
             return LOCK;
         } else {
             return "hej";
