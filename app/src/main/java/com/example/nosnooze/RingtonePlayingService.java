@@ -51,7 +51,7 @@ public class RingtonePlayingService extends Service {
         }
 
         if(!this.isRunning && startId == 1) {
-            mediaSong = MediaPlayer.create(this, R.raw.alarm);
+            mediaSong = MediaPlayer.create(this, R.raw.godmorgon);
             mediaSong.start();
             this.isRunning= true;
             this.startId = 0;
