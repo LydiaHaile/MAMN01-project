@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         this.startService(serviceIntent);
     }
 
-    public void removeAlarm(int index) {
+    public static void removeAlarm(int index) {
         alarms.remove(index);
         alarmAdapter.notifyDataSetChanged();
     }
