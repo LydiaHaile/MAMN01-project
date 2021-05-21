@@ -1,6 +1,7 @@
 package com.example.nosnooze;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,17 +31,16 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     private ImageView image;
     private TextView header;
     private TextView combinationView;
-
     private TextView test1;
     private TextView test2;
     private TextView test3;
+
 
     private int[] combination = new int[3];
     private boolean[] foundCombination = new boolean[3];
     private int X;
     private int counter = 0;
-    private long time = 500;
-    private TimeUnit time1 = TimeUnit.SECONDS;
+
 
     private float currentDegree = 0f;
 
@@ -59,10 +59,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         image = (ImageView) findViewById(R.id.image);
         header = (TextView) findViewById(R.id.header);
         combinationView = (TextView) findViewById(R.id.combinationView);
+        mediaPlayer = MediaPlayer.create(this, R.raw.lock);
 
-        test1 = (TextView) findViewById(R.id.aCombination1);
-        test2 = (TextView) findViewById(R.id.aCombination2);
-        test3 = (TextView) findViewById(R.id.aCombination3);
 
         //header.setText("To turn off the alarm, unlock the lock by " +
                 //"turning your phone and find the combination");
@@ -139,6 +137,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
             serviceIntent.putExtra("extra", "alarm_off");
             this.startService(serviceIntent);
+
            /* try {
                 Thread.sleep(1000);
             } catch (InterruptedException ie) {
@@ -152,6 +151,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             }*/
             Intent returnIntent = new Intent(this, MainActivity.class);
             this.startActivity(returnIntent);
+
         }
     }
 
@@ -161,6 +161,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     }
 
     private void feedback() {
+        mediaPlayer.start();
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -169,17 +170,17 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             vibrator.vibrate(500);
         }
 
-        if(X == 0) {
+       /* if(X == 0) {
             test1.setTextColor(Color.GREEN);
             test1.setText("" + combination[0]);
         } else if (X == 1) {
             test2.setTextColor(Color.GREEN);
             test2.setText("" + combination[1]);
-        } else {
+        } else if (X == 2){
+            Toast.makeText(this, "Inne i else" , Toast.LENGTH_SHORT).show();
             test3.setTextColor(Color.GREEN);
             test3.setText("" + combination[2]);
-
-        }
+            }*/
 
     }
 }
