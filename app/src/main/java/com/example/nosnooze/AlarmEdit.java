@@ -49,8 +49,14 @@ public class AlarmEdit extends AppCompatActivity implements AdapterView.OnItemSe
             startActivity(goBackIntent);
         });
 
+        int alarmPos = getIntent().getIntExtra("position",0);
+        int alarmId = getIntent().getIntExtra("alarmId",0);
+        String alarmTime = getIntent().getStringExtra("time");
+        String hourAndMinute[] = alarmTime.split(":");
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
+        timePicker.setHour(Integer.parseInt(hourAndMinute[0]));
+        timePicker.setMinute(Integer.parseInt(hourAndMinute[1]));
         timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
             tpHour = hourOfDay;
             tpMinute = minute;
@@ -75,10 +81,8 @@ public class AlarmEdit extends AppCompatActivity implements AdapterView.OnItemSe
             calendar.set(Calendar.SECOND, 0);
             alarm = new Alarm(time, (int) System.currentTimeMillis(),  selectedInteraction, calendar);
 
+
             //ta bort det gamla larmet
-            int alarmPos = getIntent().getIntExtra("position",0);
-            int alarmId = getIntent().getIntExtra("alarmId",0);
-            String alarmTime = getIntent().getStringExtra("time");
             ma.removeAlarm(alarmPos);
             ma.getAlarmAdapter().disableAlarm(alarmId, alarmTime);
 

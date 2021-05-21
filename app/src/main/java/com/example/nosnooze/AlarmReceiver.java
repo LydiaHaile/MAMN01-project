@@ -51,6 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (get_your_interaction == 1) {
             //PHOTO SCAN
             Intent methodIntent = new Intent(context, PhotoScan.class);
+            methodIntent.putExtra("time", alarm.getTime());
             methodIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(methodIntent);
             createNotification(methodIntent, context);

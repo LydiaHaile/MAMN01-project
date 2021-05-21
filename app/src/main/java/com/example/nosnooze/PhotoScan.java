@@ -35,6 +35,8 @@ public class PhotoScan extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_scan);
+        TextView time = findViewById(R.id.time);
+        time.setText(getIntent().getStringExtra("time"));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         startColor = findViewById(R.id.imageView);
         generateColor();

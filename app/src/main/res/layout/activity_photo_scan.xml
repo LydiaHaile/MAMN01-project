@@ -8,7 +8,7 @@
     tools:context=".PhotoScan">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/time">
 
         <Space
             android:layout_width="0dp"
@@ -131,7 +131,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <ImageButton
         android:id="@+id/snap_button"
