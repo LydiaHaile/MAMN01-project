@@ -127,6 +127,11 @@ public class AlarmSetter extends AppCompatActivity implements AdapterView.OnItem
         }*/
     }
 
+    public void infoPopup(View view){
+        Intent popup = new Intent(this, infoPopup.class);
+        this.startActivity(popup);
+    }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 

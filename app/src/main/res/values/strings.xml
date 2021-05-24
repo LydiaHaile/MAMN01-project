@@ -4,12 +4,12 @@
     <string name="set_time">Done</string>"
 
     <string-array name="interactions">
-        <item>Randomize interaction</item>
-        <item>Matching color in photo</item>
-        <item>Taking 10 steps</item>
-        <item>Shaking the phone</item>
-        <item>Sorting numbers</item>
-        <item>Unlocking lock</item>
+        <item>1. Randomize interaction</item>
+        <item>2. Matching color in photo</item>
+        <item>3. Taking 10 steps</item>
+        <item>4. Shaking the phone</item>
+        <item>5. Sorting numbers</item>
+        <item>6. Unlocking lock</item>
     </string-array>
 
 </resources>

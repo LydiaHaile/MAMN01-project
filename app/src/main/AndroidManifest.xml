@@ -16,7 +16,11 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoSnooze">
-        <activity android:name=".AlarmEdit"></activity>
+        <activity
+            android:name=".infoPopup"
+            android:theme="@style/Apptheme.Popup">
+        </activity>
+        <activity android:name=".AlarmEdit" />
         <activity
             android:name=".AlarmPopup"
             android:theme="@style/Apptheme.Popup" />

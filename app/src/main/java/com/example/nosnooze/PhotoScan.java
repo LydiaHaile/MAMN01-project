@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -62,23 +63,26 @@ public class PhotoScan extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
-            int compositeColor = getAverageColor(capturedImage);
-            ImageView compositeColorView = findViewById(R.id.composite_color);
-            compositeColorView.setBackgroundColor(compositeColor);
+        try {
+            if (requestCode == 100 ) {
+                Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
+                int compositeColor = getAverageColor(capturedImage);
+                ImageView compositeColorView = findViewById(R.id.composite_color);
+                compositeColorView.setBackgroundColor(compositeColor);
 
-            if (compareColors(compositeColor, colorMatch) < limit) {
-                Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
-                serviceIntent.putExtra("extra", "alarm_off");
-                this.startService(serviceIntent);
-                Intent returnIntent = new Intent(this, MainActivity.class);
-                this.startActivity(returnIntent);
-            } else {
-                TextView retryPrompt = findViewById(R.id.retry_prompt);
-                retryPrompt.setText("Try again!");
+                if (compareColors(compositeColor, colorMatch) < limit) {
+                    Intent serviceIntent = new Intent(this, RingtonePlayingService.class);
+                    serviceIntent.putExtra("extra", "alarm_off");
+                    this.startService(serviceIntent);
+                    Intent returnIntent = new Intent(this, MainActivity.class);
+                    this.startActivity(returnIntent);
+                } else {
+                    TextView retryPrompt = findViewById(R.id.retry_prompt);
+                    retryPrompt.setText("Try again!");
+                }
             }
-
+        }catch (NullPointerException e){
+            Log.d("message","hej" +e);
         }
     }
 
@@ -93,11 +97,16 @@ public class PhotoScan extends AppCompatActivity {
 
         int[] pixels = new int[width * height];
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        int count = 0;
         for (int color: pixels) {
-            pixelCount++;
-            red+= Color.red(color);
-            green += Color.green(color);
-            blue += Color.blue(color);
+            count++;
+            int countWidth = count % width;
+            if (countWidth > width * 0.30 && countWidth <  width * 0.70) {
+                pixelCount++;
+                red+= Color.red(color);
+                green += Color.green(color);
+                blue += Color.blue(color);
+            }
         }
         return Color.rgb(red / pixelCount, green / pixelCount, blue / pixelCount);
     }

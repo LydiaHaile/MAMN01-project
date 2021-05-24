@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".infoPopup">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="327dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+
+        android:text="1. Randomize interaction: The Interaction will be randomized between all the types below."
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="341dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+
+        android:text="2. Matching color in photo: Take a photo with the average color similar to the prompted color. "
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="21dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="346dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:text="3. Taking 10 steps: Take ten steps by walking around in your room with your phone in your hand"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="318dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+
+        android:text="4. Shaking the phone: Grab your phone and shake it as hard as you can."
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="322dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+
+        android:text="6. Unlocking lock: Tilt your phone in different angles."
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:layout_editor_absoluteX="14dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="326dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+
+        android:text="5. Sorting number: Sort the 5 numbers from lowest to highest."
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

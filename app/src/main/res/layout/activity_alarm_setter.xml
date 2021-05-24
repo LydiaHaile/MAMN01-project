@@ -9,14 +9,15 @@
     android:background="@color/light_light_blue">
 
     <TextView
+        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/row_background"
+        android:padding="10dp"
         android:text="NEW ALARM"
         android:textColor="@color/himmelsklila"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +25,13 @@
         app:layout_constraintVertical_bias="0.06" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/abort_alarm"
@@ -64,26 +66,12 @@
         android:scaleX="1.2"
         android:scaleY="1.2"
         android:timePickerMode="spinner"
-        app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.668" />
-
-    <Spinner
-        android:id="@+id/interaction_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/row_background"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.295" />
 
     <TextView
         android:id="@+id/textView5"
@@ -91,10 +79,42 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:text="Choose interaction to disable alarm"
-        app:layout_constraintBottom_toTopOf="@+id/interaction_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        app:layout_constraintVertical_bias="0.544">
+
+        <Spinner
+            android:id="@+id/interaction_spinner"
+            android:layout_width="332dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/row_background"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/infoButton"
+            android:layout_width="45dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/row_background"
+            android:onClick="infoPopup"
+            android:text="?" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
