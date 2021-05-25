@@ -2,6 +2,24 @@
     <string name="app_name">NoSnooze</string>
     <string name="button_one">+</string>
     <string name="set_time">Done</string>"
+    <string name="hint_1">
+        Randomize interaction: The Interaction will be randomized between all the types below.</string>
+    <string name="hint_2">
+        Matching color in photo: Take a photo with the average color similar to the prompted color.
+    </string>
+    <string name="hint_3">
+        Taking 10 steps: Take ten steps by walking around in your room with your phone in your hand
+    </string>
+    <string name="hint_4">
+        Shaking the phone: Grab your phone and shake it as hard as you can.
+    </string>
+    <string name="hint_5">
+        Sorting number: Sort the 5 numbers from lowest to highest.
+    </string>
+    <string name="hint_6">
+        Unlocking lock: Tilt your phone in different angles.
+    </string>
+
 
     <string-array name="interactions">
         <item>1. Randomize interaction</item>
