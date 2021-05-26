@@ -36,8 +36,8 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
     private TextView test3;
 
 
-    private int[] combination = new int[3];
-    private boolean[] foundCombination = new boolean[3];
+    private int[] combination = new int[4];
+    private boolean[] foundCombination = new boolean[4];
     private int X;
     private int counter = 0;
 

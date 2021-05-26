@@ -28,7 +28,7 @@ public class PhotoScan extends AppCompatActivity {
 
     ImageView startColor;
     int colorMatch;
-    int limit = 100;
+    int limit = 180;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

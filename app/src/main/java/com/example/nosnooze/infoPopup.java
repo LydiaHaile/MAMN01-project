@@ -25,7 +25,7 @@ public class infoPopup extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*0.9), (int)(height*0.70));
+        getWindow().setLayout((int)(width), (int)(height*0.70));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
