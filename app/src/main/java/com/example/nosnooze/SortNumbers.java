@@ -52,7 +52,7 @@ public class SortNumbers extends AppCompatActivity {
         fourth = (Button)findViewById(R.id.fourthNumber);
         fifth = (Button)findViewById(R.id.fifthNumber);
 
-        test  = (TextView)findViewById(R.id.test);
+        //test  = (TextView)findViewById(R.id.test);
 
         //RANDOMIZE FIVE NUMBERS - PLACE IN ARRAY-LIST NUMBERS (ALSO MAKES SURE THERE ARE NO DUPLICATES)
         Random rand = new Random();
@@ -69,7 +69,7 @@ public class SortNumbers extends AppCompatActivity {
 
         //SORT THE ARRAY-LIST NUMBERS (ONLY FOR TESTING)
         Collections.sort(numbers);
-        test.setText("In order : " + numbers.get(0) + " " + numbers.get(1) + " " + numbers.get(2) + " " + numbers.get(3) + " " + numbers.get(4));
+        //test.setText("In order : " + numbers.get(0) + " " + numbers.get(1) + " " + numbers.get(2) + " " + numbers.get(3) + " " + numbers.get(4));
     }
 
     public void onClick(View view) {

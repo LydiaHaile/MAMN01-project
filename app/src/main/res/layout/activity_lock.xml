@@ -42,7 +42,7 @@
         android:layout_width="242dp"
         android:layout_height="31dp"
         android:gravity="center_horizontal"
-        android:text="Spin to turn the lock."
+        android:text="Spin to turn the lock"
         android:textAlignment="center"
         android:textColor="@color/himmelsklila"
         android:textSize="20sp"

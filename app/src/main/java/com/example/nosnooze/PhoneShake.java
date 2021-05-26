@@ -20,7 +20,7 @@ public class PhoneShake extends AppCompatActivity implements SensorEventListener
     private SensorManager sensorM;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 5000;
+    private static final int SHAKE_THRESHOLD = 4000;
     private ProgressBar progressBar;
     int progress;
     private TextView progressText;

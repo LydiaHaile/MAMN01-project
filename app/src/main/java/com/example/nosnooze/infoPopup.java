@@ -25,12 +25,12 @@ public class infoPopup extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*0.9), (int)(height*0.6));
+        getWindow().setLayout((int)(width*0.9), (int)(height*0.70));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
-        params.y =  -20;
+        params.y = -20;
         getWindow().setAttributes(params);
 
         cancelButton = findViewById(R.id.cancel_button);
