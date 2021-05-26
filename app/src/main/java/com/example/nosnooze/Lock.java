@@ -119,7 +119,7 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
         currentDegree = -degree;
 
         //header.setText("Currently at: " + Math.round(degree/3.6));
-        Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + X, Toast.LENGTH_SHORT).show();
 
         if (Math.round(degree / 3.6) == combination[X]) {
             feedback();
