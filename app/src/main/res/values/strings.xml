@@ -14,12 +14,11 @@
         Shaking the phone: Grab your phone and shake it as hard as you can.
     </string>
     <string name="hint_5">
-        Sorting number: Sort the 5 numbers from lowest to highest.
+        Sorting numbers: Sort the 5 numbers from lowest to highest.
     </string>
     <string name="hint_6">
-        Unlocking lock: Tilt your phone in different angles.
+        Unlocking the lock: Tilt your phone in different angles.
     </string>
-
 
     <string-array name="interactions">
         <item>1. Randomize interaction</item>
@@ -27,7 +26,7 @@
         <item>3. Taking 10 steps</item>
         <item>4. Shaking the phone</item>
         <item>5. Sorting numbers</item>
-        <item>6. Unlocking lock</item>
+        <item>6. Unlocking the lock</item>
     </string-array>
 
 </resources>
