@@ -58,6 +58,11 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
 
         image = (ImageView) findViewById(R.id.image);
         header = (TextView) findViewById(R.id.header);
+
+        test1 = (TextView) findViewById(R.id.test1);
+        test2 = (TextView) findViewById(R.id.test2);
+        test3 = (TextView) findViewById(R.id.test3);
+
         combinationView = (TextView) findViewById(R.id.combinationView);
         mediaPlayer = MediaPlayer.create(this, R.raw.lock);
 
@@ -170,17 +175,16 @@ public class Lock extends AppCompatActivity implements SensorEventListener {
             vibrator.vibrate(500);
         }
 
-       /* if(X == 0) {
+       if(X == 0) {
             test1.setTextColor(Color.GREEN);
             test1.setText("" + combination[0]);
         } else if (X == 1) {
             test2.setTextColor(Color.GREEN);
             test2.setText("" + combination[1]);
         } else if (X == 2){
-            Toast.makeText(this, "Inne i else" , Toast.LENGTH_SHORT).show();
             test3.setTextColor(Color.GREEN);
             test3.setText("" + combination[2]);
-            }*/
+       }
 
     }
 }
