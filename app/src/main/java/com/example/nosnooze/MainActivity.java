@@ -92,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
         alarms.remove(index);
         alarmAdapter.notifyDataSetChanged();
     }
-    public AlarmAdapter getAlarmAdapter() {
+    public static AlarmAdapter getAlarmAdapter() {
         return alarmAdapter;
     }
+
     public void gotoAlarm(View view) {
         Intent intent = new Intent(this, AlarmSetter.class);
         startActivity(intent);

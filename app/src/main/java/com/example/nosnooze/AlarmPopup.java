@@ -63,7 +63,6 @@ public class AlarmPopup extends AppCompatActivity {
     public void deleteAlarm(View view){
         Log.d("values ", alarmId + " " + alarmPos + " " + alarmTime);
         MainActivity.removeAlarm(alarmPos);
-        //ma.removeAlarm(alarmPos);
-        //ma.getAlarmAdapter().disableAlarm(alarmId, alarmTime);
+        MainActivity.getAlarmAdapter().disableAlarm(alarmId, alarmTime);
     }
 }
